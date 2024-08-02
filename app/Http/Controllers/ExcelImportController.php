@@ -28,7 +28,7 @@ class ExcelImportController extends Controller
         return redirect('importexcel')->with('success', 'File uploaded successfully.');
         
     }
-    
+
     public function addProductsInventory()
     {
         return view('pages.addInventoryProducts');
@@ -53,12 +53,12 @@ class ExcelImportController extends Controller
     
         $response = Http::get($apiUrl);
 
-         $validatedData = $request->validate([
+        $validatedData = $request->validate([
         'file' => 'required|file|mimes:xlsx,xls,csv'
         ]);
-       $file = $request->file('excel_file');
-       $filename = $file->getClientOriginalName();
-       $import = new ExcelProductInvImports($filename);
+        $file = $request->file('excel_file');
+        $filename = $file->getClientOriginalName();
+        $import = new ExcelProductInvImports($filename);
     
             if (Excel::import($import, $file)) {
                 // Handle successful response
