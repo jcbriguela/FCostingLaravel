@@ -53,22 +53,43 @@ class ExcelImportController extends Controller
     
         $response = Http::get($apiUrl);
 
-        $validatedData = $request->validate([
-        'file' => 'required|file|mimes:xlsx,xls,csv'
-        ]);
-        $file = $request->file('excel_file');
-        $filename = $file->getClientOriginalName();
-        $import = new ExcelProductInvImports($filename);
+       $file = $request->file('excel_file');
+       $filename = $file->getClientOriginalName();
+       $import = new ExcelProductInvImports($filename);
+    //    $savedImport = Excel::import($import, $file);
     
-            if (Excel::import($import, $file)) {
-                // Handle successful response
-                return redirect()->back()->with([
-                    'data' => $response->collect(),
-                    'alert' => 'Data sent successfully'
-                ]);
-            } else {
-                // Handle error response
-                return redirect()->back()->with('alert', 'Error sending data');
-            }
+    //    if (Excel::import($import, $file))
+    //    {
+    //     $alert ="File uploaded successfully.";
+    //    }
+    //    else
+    //    {
+    //     $alert = false;
+    //    }
+        
+    //    return view('excel.ImportexcelProductInv',['data'=> $response->collect()],compact('alert'));
+
+       
+    //    if (Excel::import($import, $file)) {
+    //     // Handle successful response
+    //    return view('excel.ImportexcelProductInv',['data'=> $response->collect()])->with('alert', 'Data sent successfully');
+
+    //     } else {
+    //         // Handle error response
+    //         return redirect()->back()->with('alert', 'Error sending data');
+    //     return view('excel.ImportexcelProductInv',['data'=> $response->collect()])->with('alert', 'Error sending data');
+
+    //     }
+
+        if (Excel::import($import, $file)) {
+            // Handle successful response
+            return redirect()->back()->with([
+                'data' => $response->collect(),
+                'alert' => 'Data sent successfully'
+            ]);
+        } else {
+            // Handle error response
+            return redirect()->back()->with('alert', 'Error sending data');
+        }
     }
 }
