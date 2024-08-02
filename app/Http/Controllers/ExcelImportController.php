@@ -40,45 +40,26 @@ class ExcelImportController extends Controller
     
     public function ImportexcelProductInv(Request $request )
     {
-       
-        // $response = Http::get('http://foodcosting-001-site1.gtempurl.com/api/product/lists?');
-        $response = Http::get('localhost:8080/api/product/lists?');
+        $baseUrl = env('APP_URL');
+        $apiUrl = $baseUrl . '/api/product/lists?';
+        $response = Http::get($apiUrl);
         return view('excel.ImportexcelProductInv',['data'=> $response->collect()]);
     }
     
     public function ImportexcelProductInvPost(Request $request)
     {
+        $baseUrl = env('APP_URL');
+        $apiUrl = $baseUrl . '/api/product/lists?';
     
-       $response = Http::get('localhost:8080/api/product/lists?');
+       $response = Http::get($apiUrl);
 
+       $validatedData = $request->validate([
+        'file' => 'required|file|mimes:xlsx,xls,csv'
+    ]);
        $file = $request->file('excel_file');
        $filename = $file->getClientOriginalName();
        $import = new ExcelProductInvImports($filename);
-    //    $savedImport = Excel::import($import, $file);
     
-    //    if (Excel::import($import, $file))
-    //    {
-    //     $alert ="File uploaded successfully.";
-    //    }
-    //    else
-    //    {
-    //     $alert = false;
-    //    }
-        
-    //    return view('excel.ImportexcelProductInv',['data'=> $response->collect()],compact('alert'));
-
-       
-    //    if (Excel::import($import, $file)) {
-    //     // Handle successful response
-    //    return view('excel.ImportexcelProductInv',['data'=> $response->collect()])->with('alert', 'Data sent successfully');
-
-    //     } else {
-    //         // Handle error response
-    //         return redirect()->back()->with('alert', 'Error sending data');
-    //     return view('excel.ImportexcelProductInv',['data'=> $response->collect()])->with('alert', 'Error sending data');
-
-    //     }
-
         if (Excel::import($import, $file)) {
             // Handle successful response
             return redirect()->back()->with([
