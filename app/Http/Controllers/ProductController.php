@@ -53,7 +53,9 @@ class ProductController extends Controller
             'Remarks' => $request->Remarks,
         ];
 
-        $apiUrl = 'localhost:8080/api/product/new?';
+         $baseUrl = env('APP_URL');
+         $apiUrl = $baseUrl . '/api/product/new?';
+
         $bearerToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNzIyNDk4NzMyLCJleHAiOjE3MjI1MDIzMzIsIm5iZiI6MTcyMjQ5ODczMiwianRpIjoiSUFxZnVrTVBCRlIzZ0JqZyIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FPVfGfI7r2nFvJpenB1QhW4cMqO8yZhoYchiJ6HU5HM';
 // try{
         $response = Http::withHeaders([
