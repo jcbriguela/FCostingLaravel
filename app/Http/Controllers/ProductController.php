@@ -70,7 +70,6 @@ class ProductController extends Controller
                 // Handle error response
                 return redirect()->back()->with('alert', 'Error sending data');
             }
-
         // } catch (\Exception $e) {
         //     // Handle the error
         //     Log::error('Error sending request: ' . $e->getMessage());

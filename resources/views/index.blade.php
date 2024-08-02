@@ -7,7 +7,6 @@
 		<title>Eyelix | Food Costing</title>
 		<meta name="description" content="Updates and statistics" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="{{asset('assets/css/fonts.css')}}" />
 		<!--end::Fonts-->

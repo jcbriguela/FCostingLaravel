@@ -28,6 +28,7 @@ class ExcelImportController extends Controller
         return redirect('importexcel')->with('success', 'File uploaded successfully.');
         
     }
+    
     public function addProductsInventory()
     {
         return view('pages.addInventoryProducts');
