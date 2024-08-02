@@ -78,7 +78,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                          <!--begin::Form-->
-                                                            <form action="/StoreProduct" method = "POST" class="form" id ="addFrom">
+                                                            <form action="/StoreProduct" method = "POST" class="form" id ="addForm">
 										                	@csrf	
                                                             <div class="form-group row">
                                                                 <label  class="col-2 col-form-label">Product Code</label>
