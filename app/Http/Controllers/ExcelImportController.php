@@ -60,15 +60,15 @@ class ExcelImportController extends Controller
        $filename = $file->getClientOriginalName();
        $import = new ExcelProductInvImports($filename);
     
-        if (Excel::import($import, $file)) {
-            // Handle successful response
-            return redirect()->back()->with([
-                'data' => $response->collect(),
-                'alert' => 'Data sent successfully'
-            ]);
-        } else {
-            // Handle error response
-            return redirect()->back()->with('alert', 'Error sending data');
-        }
+            if (Excel::import($import, $file)) {
+                // Handle successful response
+                return redirect()->back()->with([
+                    'data' => $response->collect(),
+                    'alert' => 'Data sent successfully'
+                ]);
+            } else {
+                // Handle error response
+                return redirect()->back()->with('alert', 'Error sending data');
+            }
     }
 }

@@ -56,20 +56,20 @@ class ProductController extends Controller
          $baseUrl = env('APP_URL');
          $apiUrl = $baseUrl . '/api/product/new?';
 
-        $bearerToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNzIyNDk4NzMyLCJleHAiOjE3MjI1MDIzMzIsIm5iZiI6MTcyMjQ5ODczMiwianRpIjoiSUFxZnVrTVBCRlIzZ0JqZyIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FPVfGfI7r2nFvJpenB1QhW4cMqO8yZhoYchiJ6HU5HM';
+         $bearerToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNzIyNDk4NzMyLCJleHAiOjE3MjI1MDIzMzIsIm5iZiI6MTcyMjQ5ODczMiwianRpIjoiSUFxZnVrTVBCRlIzZ0JqZyIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FPVfGfI7r2nFvJpenB1QhW4cMqO8yZhoYchiJ6HU5HM';
 // try{
-        $response = Http::withHeaders([
+         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $bearerToken,
-            'Content-Type' => 'application/json',
-        ])->post($apiUrl, json_encode($formData));
+                'Content-Type' => 'application/json',
+            ])->post($apiUrl, json_encode($formData));
 
-        if ($response->ok()) {
-            // Handle successful response
-            return redirect()->back()->with('alert', 'Data sent successfully');
-        } else {
-            // Handle error response
-            return redirect()->back()->with('alert', 'Error sending data');
-        }
+            if ($response->ok()) {
+                // Handle successful response
+                return redirect()->back()->with('alert', 'Data sent successfully');
+            } else {
+                // Handle error response
+                return redirect()->back()->with('alert', 'Error sending data');
+            }
 
     // } catch (\Exception $e) {
     //     // Handle the error
