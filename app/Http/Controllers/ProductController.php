@@ -70,11 +70,12 @@ class ProductController extends Controller
                 // Handle error response
                 return redirect()->back()->with('alert', 'Error sending data');
             }
-        // } catch (\Exception $e) {
-        //     // Handle the error
-        //     Log::error('Error sending request: ' . $e->getMessage());
-        //     return response()->json(['error' => 'Error sending data'], 500);
-        // }
+
+    // } catch (\Exception $e) {
+    //     // Handle the error
+    //     Log::error('Error sending request: ' . $e->getMessage());
+    //     return response()->json(['error' => 'Error sending data'], 500);
+    // }
         
     }
 

@@ -7,6 +7,7 @@
 		<title>Eyelix | Food Costing</title>
 		<meta name="description" content="Updates and statistics" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="{{asset('assets/css/fonts.css')}}" />
 		<!--end::Fonts-->
@@ -21,6 +22,7 @@
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="{{asset('assets/media/logos/favicon.ico')}}" />
+
 		<!--begin::Page Vendors Styles(used by addInventoryProducts)-->
 		<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendors Styles-->
