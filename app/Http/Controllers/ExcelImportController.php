@@ -24,7 +24,6 @@ class ExcelImportController extends Controller
 
     public function import_excel_post(Request $request)
     {
-        // dd($request->file('excel_file'));
         Excel::import(new ExcelImport, $request->file('excel_file'));
         return redirect('importexcel')->with('success', 'File uploaded successfully.');
         
