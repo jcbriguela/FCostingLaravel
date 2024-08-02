@@ -51,11 +51,11 @@ class ExcelImportController extends Controller
         $baseUrl = env('APP_URL');
         $apiUrl = $baseUrl . '/api/product/lists?';
     
-       $response = Http::get($apiUrl);
+        $response = Http::get($apiUrl);
 
-       $validatedData = $request->validate([
+         $validatedData = $request->validate([
         'file' => 'required|file|mimes:xlsx,xls,csv'
-    ]);
+        ]);
        $file = $request->file('excel_file');
        $filename = $file->getClientOriginalName();
        $import = new ExcelProductInvImports($filename);

@@ -52,7 +52,6 @@
 				</button>
 				<!--end::Header Menu Mobile Toggle-->
 				<!--begin::Topbar Mobile Toggle-->
-				
 				<!--end::Topbar Mobile Toggle-->
 			</div>
 			<!--end::Toolbar-->
