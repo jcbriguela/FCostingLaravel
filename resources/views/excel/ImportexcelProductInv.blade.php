@@ -223,6 +223,101 @@
 											<!--end::Button-->
 										</div>
 									</div>
+<<<<<<< HEAD
+=======
+                                        <!-- Modal-->
+                                        <div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add Manual Record</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                         <!--begin::Form-->
+                                                            <form action="/StoreProduct" method = "POST" class="form" id ="addForm">
+										                	@csrf	
+                                                            <div class="form-group row">
+                                                                <label  class="col-2 col-form-label">Product Code</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="text" value="" id="example-text-input" name ="ProductCode" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-number-input" class="col-2 col-form-label">Insys Product Id</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="number"  id="example-number-input" name="InsysProductId" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label  class="col-2 col-form-label">Insys Product Code</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="text" id="example-text-input" name="InsysProductCode" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label  class="col-2 col-form-label">Barcode</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="text" id="example-text-input" name="Barcode"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label  class="col-2 col-form-label">Name</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="text" id="example-text-input" name="Name" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-number-input" class="col-2 col-form-label" >Cost</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="number"  id="example-number-input" name="Cost" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-number-input" class="col-2 col-form-label">Price</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="number"  id="example-number-input" name="Price" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-number-input" class="col-2 col-form-label">Mark Down</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="number"  id="example-number-input" name="isMarkDown" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-number-input" class="col-2 col-form-label">Category</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="number"  id="example-number-input" name="categoryId" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-number-input" class="col-2 col-form-label" >Model</label>
+                                                                <div class="col-10">
+                                                                <input class="form-control" type="number"  id="example-number-input" name="modelId" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-number-input" class="col-2 col-form-label">Remarks</label>
+                                                                <div class="col-10">
+                                                                <textarea class="form-control form-control-solid" rows="3" name="Remarks"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                </div>
+                                                                <div class="col-10">
+                                                                <button type="submit" class="btn btn-success mr-2">Submit</button>
+                                                                <button type="reset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            </form>
+>>>>>>> f0e99d08ee0357026f561cca540723f71d3a739c
 
 									<!--begin::Form-->
 									<form  action ="Importexcel-ProductInv" method ="POST" enctype="multipart/form-data">
@@ -578,5 +673,9 @@ $(document).ready(function() {
     }
   });
 </script>
+<<<<<<< HEAD
 
 @endsection
+=======
+@endsection
+>>>>>>> f0e99d08ee0357026f561cca540723f71d3a739c
