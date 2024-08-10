@@ -42,9 +42,14 @@ Route::get('ForApprovalInventory',[ExcelImportController::class,'ForApprovalInve
 //import addProductInventory
 Route::GET('ImportexcelProductInv',[ExcelImportController::class,'ImportexcelProductInv']);
 Route::POST('Importexcel-ProductInv',[ExcelImportController::class,'ImportexcelProductInvPost']);
+
 Route::POST('StoreProduct',[ProductController::class,'store']);
 Route::put('/update-record', [ProductController::class, 'update']);
+Route::get('/show-list', [ProductController::class, 'show']);
+Route::get('/show-record', [ProductController::class, 'showRecord']);
+Route::get('/show-record/{id}', [YourController::class, 'showRecord'])->name('showRecord');
 
+Route::put('/update-status', [ProductController::class, 'updateStatus']);
 
 //register api
 

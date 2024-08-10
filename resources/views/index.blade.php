@@ -24,9 +24,11 @@
 		<link rel="shortcut icon" href="{{asset('assets/media/logos/favicon.ico')}}" />
 
 		<!--begin::Page Vendors Styles(used by addInventoryProducts)-->
-		<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<!-- <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" /> -->
 		<!--end::Page Vendors Styles-->
-		<script src="{{asset('jquery/jquery.min.js')}}"></script>
+		<!-- <script src="{{asset('assets/jquery/jquery.min.js')}}"></script> -->
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -412,8 +414,13 @@
 		
 
 		<!--begin::Page Vendors(used by addInventoryProducts)-->
-		<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.j')}}s"></script>
-		<script src="{{asset('assets/js/pages/crud/datatables/data-sources/html.js')}}"></script>
+		<!-- <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.j')}}s"></script>
+		<script src="{{asset('assets/js/pages/crud/datatables/data-sources/html.js')}}"></script> -->
+		<script src="{{asset('assets/js/pages/crud/ktdatatable/advanced/row-details.js')}}"></script>
+		
+		
+
+
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->
