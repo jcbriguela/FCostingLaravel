@@ -45,7 +45,6 @@ class ExcelImportController extends Controller
         // $apiUrl = $baseUrl . '/api/product/lists?';
         // $response = Http::get($apiUrl);
         //return view('excel.ImportexcelProductInv',['data'=> $response->collect()],compact('baseUrl'));
-
         $response = DB::table('uplproduct')
                      ->get();
         $data =json_decode($response,true);

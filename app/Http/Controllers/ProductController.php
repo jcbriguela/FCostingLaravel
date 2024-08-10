@@ -77,8 +77,7 @@ class ProductController extends Controller
         // Handle the error
         Log::error('Error sending request: ' . $e->getMessage());
         return response()->json(['error' => 'Error sending data'], 500);
-    }
-        
+    } 
     }
 
     /**

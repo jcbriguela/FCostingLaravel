@@ -496,8 +496,7 @@
 						console.error('AJAX error:', error);
 					}
 				});
-
-		
+	
 			});
 		});
 	

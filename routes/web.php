@@ -52,6 +52,5 @@ Route::get('/show-record/{id}', [YourController::class, 'showRecord'])->name('sh
 Route::put('/update-status', [ProductController::class, 'updateStatus']);
 
 //register api
-
 // Route::get('register', [LoginController::class,'register'])->name(register);
 // Route::post('registerApi', [LoginController::class,'registerApi'])->name(registerApi);
