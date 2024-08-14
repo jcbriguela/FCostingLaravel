@@ -45,7 +45,7 @@ var KTApexChartsDemo = function () {
 		const apexChart = "#chart_1";
 		var options = {
 			series: [{
-				name: "Desktops",
+				name: "Cakes",
 				data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
 			}],
 			chart: {
@@ -725,29 +725,29 @@ var KTApexChartsDemo = function () {
 		const apexChart = "#chart_8";
 		var options = {
 			series: [{
-				name: 'Bubble1',
-				data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+				name: 'CAKES',
+				data: generateBubbleData(new Date('15 AUG 2017 GMT').getTime(), 20, {
 				  min: 10,
 				  max: 60
 				})
 			  },
 			  {
-				name: 'Bubble2',
-				data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+				name: 'BAKERY',
+				data: generateBubbleData(new Date('15 AUG 2017 GMT').getTime(), 20, {
 				  min: 10,
 				  max: 60
 				})
 			  },
 			  {
-				name: 'Bubble3',
-				data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+				name: 'GOURMET',
+				data: generateBubbleData(new Date('15 AUG 2017 GMT').getTime(), 20, {
 				  min: 10,
 				  max: 60
 				})
 			  },
 			  {
-				name: 'Bubble4',
-				data: generateBubbleData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+				name: 'SM-RM',
+				data: generateBubbleData(new Date('15 AUG 2017 GMT').getTime(), 20, {
 				  min: 10,
 				  max: 60
 				})
@@ -897,27 +897,28 @@ var KTApexChartsDemo = function () {
 						ranges: [{
 							from: -30,
 							to: 5,
-							name: 'low',
+							name: 'Solo',
 							color: success
 						},
 						{
 							from: 6,
 							to: 20,
-							name: 'medium',
+							name: 'Couple',
 							color: primary
 						},
 						{
 							from: 21,
 							to: 45,
-							name: 'high',
+							name: 'Small Group',
 							color: warning
 						},
 						{
 							from: 46,
 							to: 55,
-							name: 'extreme',
+							name: 'Medium Group',
 							color: danger
 						}
+						
 						]
 					}
 				}

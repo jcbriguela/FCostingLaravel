@@ -79,7 +79,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--begin::Title-->
 								<!--begin::Form group-->
 								<div class="form-group">
-									<label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+									<label class="font-size-h6 font-weight-bolder text-dark">User Name</label>
 									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="username" autocomplete="off" />
 								</div>
 								<!--end::Form group-->
@@ -94,7 +94,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--end::Form group-->
 								<!--begin::Action-->
 								<div class="pb-lg-0 pb-5">
-									<button type="button" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+									<button type="button" id="loginBtn" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
 									
 								</div>
 								<!--end::Action-->
@@ -120,7 +120,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--end::Form group-->
 								<!--begin::Form group-->
 								<div class="form-group">
-									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="email" placeholder="Email" name="email" autocomplete="off" />
+									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="username" placeholder="User Name" name="username" autocomplete="off" />
 								</div>
 								<!--end::Form group-->
 								<!--begin::Form group-->
@@ -209,6 +209,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/js/pages/custom/login/login-general.js')}}"></script>
 		<!--end::Page Scripts-->
+		<script type="text/javascript">
+				document.getElementById('loginBtn').addEventListener('click', function() {
+						// Redirect to dashboard (replace with your actual dashboard URL)
+						window.location.href = '/dashboard';
+					});
+
+			</script>
 	</body>
 	<!--end::Body-->
 </html>

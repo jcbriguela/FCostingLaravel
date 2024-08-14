@@ -45,6 +45,7 @@ class ExcelImportController extends Controller
         // $apiUrl = $baseUrl . '/api/product/lists?';
         // $response = Http::get($apiUrl);
         //return view('excel.ImportexcelProductInv',['data'=> $response->collect()],compact('baseUrl'));
+       
         $response = DB::table('uplproduct')
                      ->get();
         $data =json_decode($response,true);
@@ -59,7 +60,8 @@ class ExcelImportController extends Controller
         // $apiUrl = $baseUrl . '/api/product/lists?';
         // $response = Http::get($apiUrl);
 
-        $response = DB::table('uplproduct')->get();
+        // $response = DB::table('uplproduct')->get();
+        $response = DB::select('CALL sSP_UPLOADFILE_STATUS');
 
         //  $validatedData = $request->validate([
         // 'file' => 'required|file|mimes:xlsx,xls,csv'

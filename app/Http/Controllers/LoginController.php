@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class LoginController extends Controller
 {
@@ -13,14 +15,28 @@ class LoginController extends Controller
     }
 
     //register Api
-    public function UserRegistration(Request $request)
+    public function register(Request $request)
     {
-        dd("hello");
-       $response = Http::post('localhost:8080/api/register?',[
-        'name' => 'jean',
-        'email' => 'jean@mail.com',
-        'password' => '1234'
-       ]);
+        //** API */
+        //    $response = Http::post('localhost:8080/api/register?',[
+        //     'name' => 'jean',
+        //     'email' => 'jean@mail.com',
+        //     'password' => '1234'
+        //    ]);
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        dd($request->name);
+
+        $user = User::create([
+            'Surname' => $request->name,
+            'Username' => $request->email,
+            'Password' => Hash::make($request->password),
+        ]);
 
        dd($response->json());
 
@@ -58,4 +74,38 @@ class LoginController extends Controller
             return redirect()->back()->with('error','Registration fail, Please try again');
         }
     }
+
+    public function store(Request $request)
+    {
+
+        try{
+            $result = DB::select('CALL SP_USERS_REGISTRATION(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+                'jean',
+                'briguela',
+                'jean rose',
+                'cotoner',
+                null,
+                1,
+                1,
+                'Test SP',
+                -1
+            ]);
+        // Handle successful registration, e.g., flash a success message
+        return redirect()->route('/')->with('success', 'Registration successful.');
+        
+        
+        // Check the result from the stored procedure
+            if ($result[0]->success) {
+                dd('ok');
+
+                // Successful registration
+            } else {
+                dd('error');
+            }
+        } catch (\Exception $e) {
+            // Handle unexpected errors
+            dd($e->getMessage());
+        }
+    }
+        
 }

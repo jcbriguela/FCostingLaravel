@@ -81,12 +81,12 @@
 							<!--begin::Menu Nav-->
 							<ul class="menu-nav">
 								<li class="menu-item menu-item-active" aria-haspopup="true">
-									<a href="/" class="menu-link">
+									<a href="/dashboard" class="menu-link">
 										<i class="menu-icon flaticon2-architecture-and-city"></i>
 										<span class="menu-text">Dashboard</span>
 									</a>
 								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<!-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-console"></i>
 										<span class="menu-text">Upload</span>
@@ -170,8 +170,116 @@
 											</li>
 										</ul>
 									</div>
+								</li> -->
+
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="javascript:;" class="menu-link menu-toggle">
+										<i class="menu-icon flaticon2-console"></i>
+										<span class="menu-text">Uploader</span>
+										<i class="menu-arrow"></i>	
+									</a>
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item menu-item-parent" aria-haspopup="true">
+												<span class="menu-link">
+													<span class="menu-text">Uploader</span>
+												</span>
+											</li>
+											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+												<a href="javascript:;" class="menu-link menu-toggle">
+													<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Inventory</span>
+													<i class="menu-arrow"></i>
+												</a>
+												<div class="menu-submenu">
+													<ul class="menu-subnav">
+														<li class="menu-item" aria-haspopup="true">
+															<a href="/UpIngredientList" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Upload File</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="/UPaddProductsInventory" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Manual adjustment</span>
+															</a>
+														</li>
+														
+													</ul>
+												</div>
+											</li>
+											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+												<a href="javascript:;" class="menu-link menu-toggle">
+													<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Finish Good</span>
+													<i class="menu-arrow"></i>
+												</a>
+												<div class="menu-submenu">
+													<i class="menu-arrow"></i>
+													<ul class="menu-subnav">
+														<li class="menu-item" aria-haspopup="true">
+															<a href="/FGupload" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot"></i>
+																	<span></span>
+																</i>
+																<span class="menu-text">Upload File</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
 								</li>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="javascript:;" class="menu-link menu-toggle">
+										<i class="menu-icon flaticon2-console"></i>
+										<span class="menu-text">Approver</span>
+										<i class="menu-arrow"></i>	
+									</a>
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item menu-item-parent" aria-haspopup="true">
+												<span class="menu-link">
+													<span class="menu-text">Approver</span>
+												</span>
+											</li>
+											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+												<a href="javascript:;" class="menu-link menu-toggle">
+													<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Inventory</span>
+													<i class="menu-arrow"></i>
+												</a>
+												<div class="menu-submenu">
+													<ul class="menu-subnav">
+														<li class="menu-item" aria-haspopup="true">
+															<a href="/UpForApprovalInventory" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">For Approval</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<!-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-telegram-logo"></i>
 										<span class="menu-text">Inventory Management</span>
@@ -217,8 +325,9 @@
 										<i class="menu-icon flaticon2-laptop"></i>
 										<span class="menu-text">Sales</span>
 									</a>
-								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								</li> -->
+								
+								<!-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-browser-2"></i>
 										<span class="menu-text">Report</span>
@@ -257,6 +366,101 @@
 																	<span></span>
 																</i>
 																<span class="menu-text">Hourly</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="#" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Daily</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="#" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Weekly</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li class="menu-item" aria-haspopup="true">
+												<a href="#" class="menu-link">
+													<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Sale Quantity</span>
+												</a>
+											</li>
+											<li class="menu-item" aria-haspopup="true">
+												<a href="#" class="menu-link">
+													<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Average Check size</span>
+												</a>
+											</li>
+											<li class="menu-item" aria-haspopup="true">
+												<a href="#" class="menu-link">
+													<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Customer Segmentation</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li> -->
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="javascript:;" class="menu-link menu-toggle">
+										<i class="menu-icon flaticon2-browser-2"></i>
+										<span class="menu-text">Reports</span>
+										<i class="menu-arrow"></i>	
+									</a>
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item menu-item-parent" aria-haspopup="true">
+												<span class="menu-link">
+													<span class="menu-text">Reports</span>
+												</span>
+											</li>
+											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+														<a href="javascript:;" class="menu-link menu-toggle">
+														<i class="menu-bullet menu-bullet-line">
+														<span></span>
+													</i>
+													<span class="menu-text">Analysis</span>
+													<i class="menu-arrow"></i>
+												</a>
+												<div class="menu-submenu">
+													<i class="menu-arrow"></i>
+													<ul class="menu-subnav">
+														<li class="menu-item" aria-haspopup="true">
+															<a href="/ProductPerformance" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot"></i>
+																	<span></span>
+																</i>
+																<span class="menu-text">Product Performace</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="/CustomerSegmentation" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot"></i>
+																	<span></span>
+																</i>
+																<span class="menu-text">Customer Segmentation</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="/SalesOverTime" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Sales Over Time</span>
 															</a>
 														</li>
 														<li class="menu-item" aria-haspopup="true">
@@ -418,7 +622,12 @@
 		<script src="{{asset('assets/js/pages/crud/datatables/data-sources/html.js')}}"></script> -->
 		<script src="{{asset('assets/js/pages/crud/ktdatatable/advanced/row-details.js')}}"></script>
 		
-		
+		<!--begin::Page Scripts(used Upload Sales)-->
+		<script src="{{asset('assets/js/pages/crud/file-upload/dropzonejs.js')}}"></script>
+		<!--end::Page Scripts-->
+		<!--begin::Page Scripts(used by Reports chart)-->
+		<script src="{{asset('assets/js/pages/features/charts/apexcharts.js')}}"></script>
+		<!--end::Page Scripts-->
 
 
 		<!--end::Page Scripts-->

@@ -223,101 +223,6 @@
 											<!--end::Button-->
 										</div>
 									</div>
-<<<<<<< HEAD
-=======
-                                        <!-- Modal-->
-                                        <div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Add Manual Record</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <i aria-hidden="true" class="ki ki-close"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                         <!--begin::Form-->
-                                                            <form action="/StoreProduct" method = "POST" class="form" id ="addForm">
-										                	@csrf	
-                                                            <div class="form-group row">
-                                                                <label  class="col-2 col-form-label">Product Code</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="text" value="" id="example-text-input" name ="ProductCode" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-number-input" class="col-2 col-form-label">Insys Product Id</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="number"  id="example-number-input" name="InsysProductId" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label  class="col-2 col-form-label">Insys Product Code</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="text" id="example-text-input" name="InsysProductCode" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label  class="col-2 col-form-label">Barcode</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="text" id="example-text-input" name="Barcode"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label  class="col-2 col-form-label">Name</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="text" id="example-text-input" name="Name" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-number-input" class="col-2 col-form-label" >Cost</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="number"  id="example-number-input" name="Cost" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-number-input" class="col-2 col-form-label">Price</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="number"  id="example-number-input" name="Price" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-number-input" class="col-2 col-form-label">Mark Down</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="number"  id="example-number-input" name="isMarkDown" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-number-input" class="col-2 col-form-label">Category</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="number"  id="example-number-input" name="categoryId" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-number-input" class="col-2 col-form-label" >Model</label>
-                                                                <div class="col-10">
-                                                                <input class="form-control" type="number"  id="example-number-input" name="modelId" required/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-number-input" class="col-2 col-form-label">Remarks</label>
-                                                                <div class="col-10">
-                                                                <textarea class="form-control form-control-solid" rows="3" name="Remarks"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                            <div class="card-footer">
-                                                            <div class="row">
-                                                                <div class="col-2">
-                                                                </div>
-                                                                <div class="col-10">
-                                                                <button type="submit" class="btn btn-success mr-2">Submit</button>
-                                                                <button type="reset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                            </form>
->>>>>>> f0e99d08ee0357026f561cca540723f71d3a739c
 
 									<!--begin::Form-->
 									<form  action ="Importexcel-ProductInv" method ="POST" enctype="multipart/form-data">
@@ -445,9 +350,11 @@
 																</button>
 																<div class="dropdown-menu">
 																@csrf
+																<meta name="csrf-token" content="{{ csrf_token() }}">
 																		<li><a class="dropdown-item" href="#" data-status="1">Approved</a></li>
 																		<li><a class="dropdown-item" href="#" data-status="2">Disapproved</a></li>
-																</div>
+</meta>
+																	</div>
 															</div>
 															</td>
 														</tr>
@@ -470,9 +377,11 @@
 															</button>
 														</div>
 														<div class="modal-body">
-														<table class="table">  
+														<table class="table">
 															<thead>
 																<tr>
+																	<th>id</th>
+																	<th><input id ="selectAll" type="checkbox"  class="checkbox-row"></th>
 																	<th>Product Code</th>
 																	<th>Insys Product Id</th>
 																	<th>Insys Product Code</th>
@@ -490,6 +399,8 @@
 															</table>
 														</div>
 														<div class="modal-footer">
+															<button id="submitButton" type="button" class="btn btn-light-primary font-weight-bold">Approved</button>
+															<button id="submitButton" type="button" class="btn btn-light-primary font-weight-bold">Disapproved</button>
 															<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
 														</div>
 													</div>
@@ -509,120 +420,178 @@
 					</div>
 
 <script type="text/javascript">
+
 		$(document).ready(function() {
-			$('#btnShow').click(function() {
-				var buttonValue = $(this).data('value');
-				$.ajax({
-					type: 'GET',
-					url: '/show-list',
-					data: {
-						buttonValue: buttonValue,
-						_token: $('meta[name="csrf-token"]').attr('content')
-					},
-					success: function(jsondata) {
-						console.log('jsondata:', jsondata); // Check the JSON data
+			$('#btnShow').click(function() {	
+			var buttonValue = $(this).data('value');
+			alert(buttonValue);
+			$.ajax({
+			type: 'GET',
+			url: '/show-list',
+			data: {
+				buttonValue: buttonValue,
+				_token: $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function(jsondata) {
+				console.log('jsondata:', jsondata); // Check the JSON data
+
+				const dataGrid = document.getElementById('modalTable');
+				const tableBody = dataGrid.querySelector('tbody');
+
+				tableBody.innerHTML = '';
+
+				if (Array.isArray(jsondata)) {
+				jsondata.forEach(item => {
+					const newRow = document.createElement('tr');
+					 
+					const idCell = document.createElement('td');
+					// Checkbox cell
+					const checkboxCell = document.createElement('td');
+					const checkbox = document.createElement('input');
+					checkbox.type = 'checkbox';
+					checkbox.classList.add('selected-item');  
+
+					checkboxCell.appendChild(checkbox);
+					newRow.appendChild(checkboxCell);
+
+
+					const productCodeCell = document.createElement('td');
+					const InsysProductCodeCell = document.createElement('td');
+					const InsysProductIdCodeCell = document.createElement('td');
+					const ProductNameCell = document.createElement('td');
+					const CategoryCell = document.createElement('td');
+					const ModelCell = document.createElement('td');
+					const CostCell = document.createElement('td');
+					const PriceCell = document.createElement('td');
+					const RemarksCell = document.createElement('td');
+					const editButtonCell = document.createElement('td');
+
+					// ... other cell creation
+
+					idCell.textContent = item.id;
+					newRow.appendChild(idCell);
+
+					// Create the edit button
+					const editButton = document.createElement('button');
+					editButton.type = 'button';
+					editButton.classList.add('btn', 'btn-primary','btn-sm', 'edit-btn');	
+					editButton.textContent = 'Edit';
+					editButton.dataset.id = item.ProductCode;
+
+					// Append the edit button to the editButtonCell
+					editButtonCell.appendChild(editButton);
+						
+
+					// ... populate other cells
+
+					productCodeCell.textContent = item.ProductCode;
+					InsysProductCodeCell.textContent = item.InsysProductCode;
+					InsysProductIdCodeCell.textContent = item.InsysProductId;
+					ProductNameCell.textContent = item.ProductName;
+					CategoryCell.textContent = item.Category;
+					ModelCell.textContent = item.Model;
+					CostCell.textContent = item.Cost;
+					PriceCell.textContent = item.Price;
+					RemarksCell.textContent = item.Remarks;
+					// ... set content for other cells
+
+					newRow.appendChild(productCodeCell);
+					newRow.appendChild(InsysProductCodeCell);
+					newRow.appendChild(InsysProductIdCodeCell);
+					newRow.appendChild(ProductNameCell);
+					newRow.appendChild(CategoryCell);
+					newRow.appendChild(ModelCell);
+					newRow.appendChild(CostCell);
+					newRow.appendChild(PriceCell);
+					newRow.appendChild(RemarksCell);
+					newRow.appendChild(editButtonCell);
 					
-						const dataGrid = document.getElementById('modalTable');
-						const tableBody = dataGrid.querySelector('tbody');
+					// ... append other cells
 
-						tableBody.innerHTML = '';
-						
-						if (Array.isArray(jsondata)) {
-							jsondata.forEach(item => {
-							const newRow = document.createElement('tr');
-							const productCodeCell = document.createElement('td');
-							const InsysProductCodeCell = document.createElement('td');
-							const InsysProductIdCodeCell = document.createElement('td');
-							const ProductNameCell = document.createElement('td');
-							const CategoryCell = document.createElement('td');
-							const ModelCell = document.createElement('td');
-							const CostCell = document.createElement('td');
-							const PriceCell = document.createElement('td');
-							const RemarksCell = document.createElement('td');
-							const editButtonCell = document.createElement('td');
-						
-							// ... create other cells
-
-							productCodeCell.textContent = item.ProductCode;
-							InsysProductCodeCell.textContent = item.InsysProductCode;
-							InsysProductIdCodeCell.textContent = item.InsysProductId;
-							ProductNameCell.textContent = item.ProductName;
-							CategoryCell.textContent = item.Category;
-							ModelCell.textContent = item.Model;
-							CostCell.textContent = item.Cost;
-							PriceCell.textContent = item.Price;
-							RemarksCell.textContent = item.Remarks;
-
-							// Create the edit button
-							const editButton = document.createElement('button');
-								editButton.type = 'button';
-								editButton.classList.add('btn', 'btn-primary','btn-sm', 'edit-btn');	
-								editButton.textContent = 'Edit';
-								editButton.dataset.id = item.ProductCode;
-
-								// Append the edit button to the editButtonCell
-								editButtonCell.appendChild(editButton);
-						
-							// ... populate other cells
-
-							newRow.appendChild(productCodeCell);
-							newRow.appendChild(InsysProductCodeCell);
-							newRow.appendChild(InsysProductIdCodeCell);
-							newRow.appendChild(ProductNameCell);
-							newRow.appendChild(CategoryCell);
-							newRow.appendChild(ModelCell);
-							newRow.appendChild(CostCell);
-							newRow.appendChild(PriceCell);
-							newRow.appendChild(RemarksCell);
-							newRow.appendChild(editButtonCell);
-
-							
-							// ... append other cells
-
-							tableBody.appendChild(newRow);
-						});
-					} else {
-					console.error('jsondata is not an array:', jsondata);
+					tableBody.appendChild(newRow);
+				});
+				} else {
+				console.error('jsondata is not an array:', jsondata);
 				}
 
-						$('#modalTable').modal('show');
-					},
-					error: function(error) {
-						console.error('AJAX error:', error);
-					}
-				});
-	
+				$('#modalTable').modal('show');
+			},
+			error: function(error) {
+				console.error('AJAX error:', error);
+			}
 			});
 		});
-	
-$(document).ready(function() {
-    $('.dropdown-item').click(function(e) {
-        e.preventDefault(); // Prevent default link behavior
-        let status = $(this).data('status');
-        let recordId = $(this).closest('tr').find('td:nth-child(4)').text(); // Assuming the first column is the ID
+	});
 
-        $.ajax({
-            url: '/update-status', // Replace with your route
-            method: 'PUT',
-            data: {
-                status: status,
-                recordId: recordId,
-				_token: '{{ csrf_token() }}'
-                // _token: $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                // Handle success, e.g., show a success message or update UI
-                console.log(response);
-				alert('Success: ' + response.message);
-            },
-            error: function(error) {
-                // Handle error, e.g., show an error message
-                console.error(error);
-				alert('Error: ' + response.message)
-            }
-        });
-    });
-});
+		$('#selectAll').change(function() {
+		const isChecked = $(this).is(':checked');
+		$('.selected-item').prop('checked', isChecked);
+		});
+
+		$('#submitButton').click(function() {
+			const selectedItems = [];
+			$('.selected-item:checked').each(function() {
+				const row = $(this).closest('tr');
+				const productId = row.find('td:first-child').text(); // Assuming first cell is ProductCode
+				selectedItems.push(productId);
+			});
+
+			// Send data to the server using AJAX
+			$.ajax({
+				type: 'PUT',
+				url: '/submit-list', // Replace with your actual route
+				data: {
+				selectedItems: selectedItems,
+				_token: $('meta[name="csrf-token"]').attr('content')
+				},
+				success: function(response) {
+				// Handle successful response
+				console.log('Data saved successfully:', response);
+				},
+				error: function(error) {
+				// Handle error
+				console.error('Error saving data:', error);
+				}
+			});
+		});
+
+
+		
+		$(document).ready(function() {
+		$('.dropdown-item').click(function() {
+			var status = $(this).data('status');
+			var id = $(this).closest('tr').data('id'); // Assuming you have a data-id attribute on the row
+
+			$.ajax({
+				url: '/update-statusB',
+				type: 'PUT',
+				data: {
+					id: id,
+					status: status
+					_token: $('meta[name="csrf-token"]').attr('content')
+				},
+				success: function(response) {
+					if (response.success) {
+						// Update the UI to reflect the new status
+						$(this).closest('tr').find('.status-column').text(newStatus);
+					} else {
+						// Handle error
+						console.error(response.error);
+					}
+				},
+				error: function(xhr, status, error) {
+					// Handle error
+					console.error(xhr.responseText);
+				}
+				});
+    		});
+		});
+
+
+			
+			
+
+	
 
 
 </script>
@@ -672,10 +641,37 @@ $(document).ready(function() {
       alert('Price must be a number');
     }
   });
+
+  $(document).ready(function() {
+    $('.dropdown-item').click(function(e) {
+        e.preventDefault(); // Prevent default link behavior
+        let status = $(this).data('status');
+        let recordId = $(this).closest('tr').find('td:nth-child(4)').text(); // Assuming the first column is the ID
+        let recordId = $(this).closest('tr').find('td:nth-child(4)').text(); // Assuming the first column is the ID
+
+        $.ajax({
+            url: '/update-status', // Replace with your route
+            method: 'PUT',
+            data: {
+                status: status,
+                recordId: recordId,
+				_token: '{{ csrf_token() }}'
+                // _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // Handle success, e.g., show a success message or update UI
+                console.log(response);
+				alert('Success: ' + response.message);
+            },
+            error: function(error) {
+                // Handle error, e.g., show an error message
+                console.error(error);
+				alert('Error: ' + response.message)
+            }
+        });
+    });
+});
+
 </script>
-<<<<<<< HEAD
 
 @endsection
-=======
-@endsection
->>>>>>> f0e99d08ee0357026f561cca540723f71d3a739c
