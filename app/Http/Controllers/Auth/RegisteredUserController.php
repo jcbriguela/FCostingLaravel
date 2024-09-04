@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\DB;
-
 
 class RegisteredUserController extends Controller
 {
@@ -33,63 +31,25 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'Surname' => ['required', 'string', 'max:255'],
-            'Username' => ['required', 'string', 'max:255'],
-            'Password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+           
         ]);
 
-        //** breeze */
-        // $user = User::create([
-        //     'Surname' => $request->name,
-        //     'Username' => $request->email,
-        //     'password' => Hash::make($request->password),
-        // ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'branchid' => $request->branchid,
 
-        // event(new Registered($user));
+        ]);
 
-        // Auth::login($user);
+        event(new Registered($user));
 
-        // return redirect(RouteServiceProvider::HOME);
+        Auth::login($user);
 
-        try  
-        {
-            $result = DB::select('CALL SP_USERS_REGISTRATION(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-                'jean',
-                'briguela',
-                'jean rose',
-                'cotoner',
-                null,
-                1,
-                1,
-                'Test SP',
-                -1
-            ]);
-        // Handle successful registration, e.g., flash a success message
-        
-        
-        // Check the result from the stored procedure
-            if ($result[0]->success) {
-                dd('ok');
-        return redirect()->route('login')->with('success', 'Registration successful.');
-
-                // Successful registration
-            } else {
-                dd('error');
-            }
-        } catch (\Exception $e) {
-            // Handle unexpected errors
-            dd($e->getMessage());
-        }
-        
-        // catch (\Exception $e) {
-        //     // Handle errors, e.g., log the error, display an error message
-        //     return back()->withErrors(['error' => 'Registration failed. Please try again.']);
-        // }
-
-         // Call stored procedure for registration
-
-        // DB::select('CALL SP_USERS_REGISTRATION(?, ?, ?)', [$request->Surname, $request->Username, Hash::make($request->Password)]);
-        // Check stored procedure result and handle accordingly
-    
+        return redirect(RouteServiceProvider::HOME);
     }
 }

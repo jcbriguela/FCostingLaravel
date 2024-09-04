@@ -80,7 +80,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--begin::Form group-->
 								<div class="form-group">
 									<label class="font-size-h6 font-weight-bolder text-dark">User Name</label>
-									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="username" autocomplete="off" />
+									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="name" autocomplete="off" />
 								</div>
 								<!--end::Form group-->
 								<!--begin::Form group-->
@@ -105,7 +105,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<!--begin::Signup-->
 						<div class="login-form login-signup">
 							<!--begin::Form-->
-							<form action="/UserRegistration"  novalidate="novalidate" id="kt_login_signup_form" method ="POST">
+							<form action="{{ route('register') }}" method ="POST"  novalidate="novalidate" id="kt_login_signup_form" >
 							@csrf	
                             <!--begin::Title-->
 								<div class="pb-13 pt-lg-0 pt-5">
@@ -115,12 +115,12 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--end::Title-->
 								<!--begin::Form group-->
 								<div class="form-group">
-									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="text" placeholder="Fullname" name="name" autocomplete="off" />
+									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="text" placeholder="Fullname" id="name" name="name" :value="old('name')" autocomplete="off" />
 								</div>
 								<!--end::Form group-->
 								<!--begin::Form group-->
 								<div class="form-group">
-									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="username" placeholder="User Name" name="username" autocomplete="off" />
+									<input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="username" placeholder="User Name" name="username" name="username" :value="old('username')" autocomplete="off" />
 								</div>
 								<!--end::Form group-->
 								<!--begin::Form group-->

@@ -4,16 +4,42 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="Surname" :value="__('Surname')" />
-            <x-text-input id="Surname" class="block mt-1 w-full" type="text" name="Surname" :value="old('Surname')" required autofocus autocomplete="Surname" />
-            <x-input-error :messages="$errors->get('Surname')" class="mt-2" />
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+      
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Role')" />
+
+            <select name="role" id="role" class="block mt-1 w-full form-select appearance-none border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 rounded-md">
+                <option value="">Select Role</option>
+                <option value="Encoder">Encoder</option>
+                <option value="Approver">Approver</option>
+                <option value="Admin">Admin</option>
+            </select>
+
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Role')" />
+
+            <select name="branchid" id="branchid" class="block mt-1 w-full form-select appearance-none border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 rounded-md">
+                <option value="">Select Branch</option>
+                <option value="1">Head Office</option>
+                <option value="2">SM Sucat</option>
+            </select>
+
+            <x-input-error :messages="$errors->get('branchid')" class="mt-2" />
+        </div>
+
+        
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="Username" :value="__('Username')" />
-            <x-text-input id="Username" class="block mt-1 w-full" type="text" name="Username" :value="old('Username')" required autocomplete="Username" />
-            <x-input-error :messages="$errors->get('Username')" class="mt-2" />
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -22,7 +48,7 @@
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
-                            name="Password"
+                            name="password"
                             required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -40,7 +66,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 

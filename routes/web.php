@@ -8,6 +8,12 @@ use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\LogInController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RolesAndPermissionController;
+use App\Http\Controllers\ReceivingController;
+use App\Http\Controllers\InventoryController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,38 +26,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-
-// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::get('/', function () {
-    return view('Login.login');
-});
-Route::get('/login',[DashboardController::class,'index']);
-
-
-
-// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [LoginController::class, 'store']);
-
-
-
 //user registration
-Route::POST('UserRegistration',[LoginController::class,'UserRegistration']);
-
-
 
 Route::get('/dashboard',[DashboardController::class,'index']);
 Route::get('importexcel',[ExcelImportController::class,'import_excel']);
@@ -74,6 +49,8 @@ Route::put('/update-status', [ProductController::class, 'updateStatus']);
 Route::put('/submit-list', [ProductController::class, 'storeList']);
 
 Route::put('/update-statusB', [ProductController::class, 'updateStatusB']);
+
+
 
 //** PROTOTYPE */
 
@@ -99,5 +76,77 @@ Route::get('ProductPerformance', function () {
 Route::get('SalesOverTime', function () {
     return view('Prototype.Reports.ReportSalesOverTime');
 });
+Route::get('TransactionType', function () {
+    return view('Prototype.Reports.ReportTransactionType');
+});
+// Route::get('PurchaseOrder', function () {
+//     return view('Prototype.Inventory.PurchaseOrder');
+// });
+// Route::get('Receiving', function () {
+//     return view('Prototype.Inventory.Receiving');
+//     // return view('Prototype.Inventory.Receiving')->middleware('permission:Receiving');
+// });
+Route::get('/Receiving',[ReceivingController::class,'index']);
+
+Route::get('Inventory', function () {
+    return view('Prototype.Inventory.InventoryList');
+
+//     // return view('Prototype.Inventory.Receiving')->middleware('permission:Receiving');
+});
+// Route::GET('Inventory', [InventoryController::class, 'create']);
+
+Route::get('onGoingDev', function () {
+    return view('Prototype.ongoingDev');
+    // return view('Prototype.Inventory.Receiving')->middleware('permission:Receiving');
+});
+Route::get('InventoryList2', function () {
+    return view('Prototype.ongoingDev');
+    // return view('Prototype.Inventory.Receiving')->middleware('permission:Receiving');
+});
+
+
+// Route::POST('/inventory-list/create', [InventoryController::class, 'create']);
+Route::GET('/inventory-list/{id}', [InventoryController::class, 'create']);
+Route::get('/InventoryList2/{value_id}', 'InventoryController@yourMethod');
+Route::get('/ApprovalList',[InventoryController::class,'index']);
+
+Route::POST('/storePO', [ReceivingController::class, 'storePO']);
+// Route::GET('/getReceivingData', [ReceivingController::class, '']);
+Route::get('/getReceivingData', 'ReceivingDataController@createPO')->name('getReceivingData');
+Route::get('/PurchaseOrder',[ReceivingController::class,'indexPO']);
+
+
+
+
+
+
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::get('add-permission', [RolesAndPermissionController::class, 'addPermission']);
+
+
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+});
+
+
+// ->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::post('/logout', LoginController::class)->name('logout');
+
+
+//Receiving
+Route::get('/get_last_id', [ReceivingController::class, 'create'])->name('get_last_id');
+Route::post('/save-datagrid-data', [ReceivingController::class, 'store'])->name('save_datagrid_data');
+Route::get('/rec-show-list/id', 'ReceivingController@show')->name('rec-show-list');
+
 
 require __DIR__.'/auth.php';

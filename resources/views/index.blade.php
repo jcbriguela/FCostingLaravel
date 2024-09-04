@@ -14,10 +14,14 @@
 		<!--begin::Page Vendors Styles(used by this page)-->
 		<link href="{{asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendors Styles-->
+		<!--begin::Page Vendors Styles(used by PurchaseOrder Page)-->
+		<link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<!--end::Page Vendors Styles-->
 		<!--begin::Global Theme Styles(used by all pages)-->
 		<link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/plugins/custom/prismjs/prismjs.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+		
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
@@ -80,10 +84,11 @@
 						<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
 							<!--begin::Menu Nav-->
 							<ul class="menu-nav">
+  
 								<li class="menu-item menu-item-active" aria-haspopup="true">
 									<a href="/dashboard" class="menu-link">
 										<i class="menu-icon flaticon2-architecture-and-city"></i>
-										<span class="menu-text">Dashboard</span>
+										<span class="menu-text"> Dashboard</span>
 									</a>
 								</li>
 								<!-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -171,7 +176,64 @@
 										</ul>
 									</div>
 								</li> -->
+    
 
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="javascript:;" class="menu-link menu-toggle">
+										<i class="menu-icon flaticon2-console"></i>
+										<span class="menu-text">Inventory</span>
+										<i class="menu-arrow"></i>	
+									</a>
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/PurchaseOrder" class="menu-link">
+													<i class="menu-bullet menu-bullet-dot"></i>
+														<span></span>
+													</i>
+													<span class="menu-text">Purchase Order</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
+
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/Receiving" class="menu-link">
+													<span class="menu-text">Receving</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								@endif
+									<!-- FOR CHECKING MODULE 
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/ApprovalList" class="menu-link">
+													<span class="menu-text">For Approval List</span>
+												</a>
+											</li>
+										</ul>
+									</div> -->
+									@if(auth()->user()->role == 'Approver' || auth()->user()->role == 'Admin') 
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/ApprovalList" class="menu-link">
+													<span class="menu-text">Item List</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+									@endif
+								</li>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-console"></i>
@@ -196,6 +258,7 @@
 												</a>
 												<div class="menu-submenu">
 													<ul class="menu-subnav">
+														
 														<li class="menu-item" aria-haspopup="true">
 															<a href="/UpIngredientList" class="menu-link">
 																<i class="menu-bullet menu-bullet-dot">
@@ -464,19 +527,11 @@
 															</a>
 														</li>
 														<li class="menu-item" aria-haspopup="true">
-															<a href="#" class="menu-link">
+															<a href="/TransactionType" class="menu-link">
 																<i class="menu-bullet menu-bullet-dot">
 																	<span></span>
 																</i>
-																<span class="menu-text">Daily</span>
-															</a>
-														</li>
-														<li class="menu-item" aria-haspopup="true">
-															<a href="#" class="menu-link">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Weekly</span>
+																<span class="menu-text">Transaction Type</span>
 															</a>
 														</li>
 													</ul>
@@ -506,21 +561,34 @@
 													<span class="menu-text">Customer Segmentation</span>
 												</a>
 											</li>
+
+											
 										</ul>
 									</div>
 								</li>
 								<li class="menu-item" aria-haspopup="true">
-									<a href="javascript:;" class="menu-link">
+									<a href="/onGoingDev" class="menu-link">
 										<i class="menu-icon flaticon2-console"></i>
 										<span class="menu-text">User Access</span>
 									</a>
 								</li>
-								<li class="menu-item" aria-haspopup="true">
+								<!-- <li class="menu-item" aria-haspopup="true">
 									<a href="#" class="menu-link">
 										<i class="menu-icon flaticon2-graph-1"></i>
 										<span class="menu-text">Settings</span>
 									</a>    
+								</li> -->
+								<li class="menu-item" aria-haspopup="true">
+								<a href="/logout" class="menu-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
+										<i class="menu-icon flaticon2-graph-1"></i>
+										<span class="menu-text">Signout</span>
+									</a>    
+
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												@csrf
+											</form>
 								</li>
+								
 							</ul>
 							<!--end::Menu Nav-->
 						</div>
@@ -548,11 +616,12 @@
 								<div class="topbar-item">
 									<div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Jean</span>
+										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ session('user_name') }}</span>
 										<span class="symbol symbol-35 symbol-light-success">
-											<span class="symbol-label font-size-h5 font-weight-bold">J</span>
+											<span class="symbol-label font-size-h5 font-weight-bold">{{ Session::get('first_name_initial') }}</span>
 										</span>
 									</div>
+									
 								</div>
 								<!--end::User-->
 							</div>
@@ -567,7 +636,9 @@
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
 							<div class="container">
+								
 							@yield('content')
+
 							</div>
 							<!--end::Container-->
 						</div>
@@ -628,8 +699,17 @@
 		<!--begin::Page Scripts(used by Reports chart)-->
 		<script src="{{asset('assets/js/pages/features/charts/apexcharts.js')}}"></script>
 		<!--end::Page Scripts-->
-
-
+		<!--begin::Page Scripts(used by Receiving)-->
+		<script src="{{asset('assets/js/pages/widgets.js')}}"></script>
+		<!--end::Page Scripts-->
+		<!--begin::Page Scripts(used by PurchaseOrder)-->
+		<!-- <script src="assets/js/pages/crud/ktdatatable/base/html-table.js"></script> -->
+		<!--begin::Page Vendors(used by this page)-->
+		<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+				<!--end::Page Vendors-->
+				<!--begin::Page Scripts(used by this page)-->
+				<script src="{{asset('assets/js/pages/crud/datatables/advanced/multiple-controls-modified.js')}}"></script>
+				<!--end::Page Scripts-->
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

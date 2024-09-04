@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class LoginController extends Controller
@@ -78,34 +80,46 @@ class LoginController extends Controller
     public function store(Request $request)
     {
 
-        try{
-            $result = DB::select('CALL SP_USERS_REGISTRATION(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-                'jean',
-                'briguela',
-                'jean rose',
-                'cotoner',
-                null,
-                1,
-                1,
-                'Test SP',
-                -1
-            ]);
-        // Handle successful registration, e.g., flash a success message
-        return redirect()->route('/')->with('success', 'Registration successful.');
-        
-        
-        // Check the result from the stored procedure
-            if ($result[0]->success) {
-                dd('ok');
+        dd("helloStore");
 
-                // Successful registration
-            } else {
-                dd('error');
-            }
-        } catch (\Exception $e) {
-            // Handle unexpected errors
-            dd($e->getMessage());
-        }
+        // try{
+        //     $result = DB::select('CALL SP_USERS_REGISTRATION(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        //         'jean',
+        //         'briguela',
+        //         'jean rose',
+        //         'cotoner',
+        //         null,
+        //         1,
+        //         1,
+        //         'Test SP',
+        //         -1
+        //     ]);
+        // // Handle successful registration, e.g., flash a success message
+        // return redirect()->route('/')->with('success', 'Registration successful.');
+        
+        
+        // // Check the result from the stored procedure
+        //     if ($result[0]->success) {
+        //         dd('ok');
+
+        //         // Successful registration
+        //     } else {
+        //         dd('error');
+        //     }
+        // } catch (\Exception $e) {
+        //     // Handle unexpected errors
+        //     dd($e->getMessage());
+        // }
+    }
+
+    public function __invoke(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();  
+
+
+        return redirect()->route('login');
     }
         
 }
