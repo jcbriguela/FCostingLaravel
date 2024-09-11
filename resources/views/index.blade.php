@@ -188,11 +188,11 @@
 										<i class="menu-arrow"></i>
 										<ul class="menu-subnav">
 											<li class="menu-item" aria-haspopup="true">
-												<a href="/PurchaseOrder" class="menu-link">
+												<a href="/SalesOrder" class="menu-link">
 													<i class="menu-bullet menu-bullet-dot"></i>
 														<span></span>
 													</i>
-													<span class="menu-text">Purchase Order</span>
+													<span class="menu-text">Sales Order</span>
 												</a>
 											</li>
 										</ul>
@@ -566,6 +566,62 @@
 										</ul>
 									</div>
 								</li>
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="javascript:;" class="menu-link menu-toggle">
+										<i class="menu-icon flaticon2-console"></i>
+										<span class="menu-text">Reference</span>
+										<i class="menu-arrow"></i>	
+									</a>
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/References" class="menu-link">
+													<i class="menu-bullet menu-bullet-dot"></i>
+														<span></span>
+													</i>
+													<span class="menu-text">References</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								@if(auth()->user()->role == 'Admin') 
+
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/Receiving" class="menu-link">
+													<span class="menu-text">Masterlist</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								@endif
+									<!-- FOR CHECKING MODULE 
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/ApprovalList" class="menu-link">
+													<span class="menu-text">For Approval List</span>
+												</a>
+											</li>
+										</ul>
+									</div> -->
+									@if(auth()->user()->role == 'Approver' || auth()->user()->role == 'Admin') 
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/ApprovalList" class="menu-link">
+													<span class="menu-text">Item List</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+									@endif
+								</li>
 								<li class="menu-item" aria-haspopup="true">
 									<a href="/onGoingDev" class="menu-link">
 										<i class="menu-icon flaticon2-console"></i>
@@ -710,6 +766,9 @@
 				<!--begin::Page Scripts(used by this page)-->
 				<script src="{{asset('assets/js/pages/crud/datatables/advanced/multiple-controls-modified.js')}}"></script>
 				<!--end::Page Scripts-->
+		<!--end::Page Scripts-->
+		<!--begin::Page Scripts(used by this References)-->
+		<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

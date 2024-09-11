@@ -134,11 +134,11 @@
 
 																			<!--begin::Modal-->
 																			<div class="modal fade" id="inputDatagridModal" tabindex="-1" role="dialog" aria-labelledby="inputDatagridModalLabel" aria-hidden="true">
-														<div class="modal-dialog modal-dialog-centered modal-xl">
+																				<div class="modal-dialog modal-dialog-centered modal-xl">
 																				<div class="modal-content">
 																					<div class="modal-header">
 																						<h5 class="modal-title" id="inputDatagridModalLabel">Add New Item
-																						<button type="button" class="btn btn-primary" id="addNewRow">+</button>
+																						<button type="button" class="btn btn-primary" name="addNewRow	" id="addNewRow">+</button>
 																					</h5> 
 																						
 																							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -152,10 +152,11 @@
 																							<table class="table table-bordered">
 																								<thead>
 																									<tr>
+																										<th style="min-width: 150px">#</th>
 																										<th style="min-width: 150px">Receiving Date</th>
-																										<th style="min-width: 150px">Description</th>
 																										<th style="min-width: 150px">Item Code</th>
-																										<th style="min-width: 150px">PO Quantity</th>
+																										<th style="min-width: 150px">Description</th>
+																										<th style="min-width: 150px">SO Quantity</th>
 																										<th style="min-width: 150px">Record Quantity</th>
 																										<th style="min-width: 150px">UOM</th>
 																										<th style="min-width: 150px">Barcode</th>
@@ -197,7 +198,7 @@
 																	</tr>
 																</thead>
 																<tbody>
-												<tr>
+																<tr>
 																	@forelse ($data as $row)
 																	<tr>
 																		<td>{{ $row->Id }}</td>
@@ -210,7 +211,7 @@
 																		<td>{{ $row->ApprovedById }}</td>
 																		<td>{{ $row->CreatedDate }}</td>
 																		<td>
-																			<button data-toggle="modal" data-target="#inputDatagridModal"  class="btn btn-sm  btn-icon" data-id="{{ $row->Id }}">
+																			<button id ="btnAdd" data-toggle="modal" data-target="#inputDatagridModal"  class="btn btn-sm  btn-icon" data-value="{{ $row->Id }}">
 																			<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo13\dist/../src/media/svg/icons\Files\File-plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 																					<polygon points="0 0 24 0 24 24 0 24"/>
@@ -219,7 +220,7 @@
 																				</g>
 																			</svg><!--end::Svg Icon--></span>
 																			</button>
-																			<a href="/Inventory" class="btn btn-sm btn-clean btn-icon" title ="">
+																			<a href="/inventory-list/{{ $row->Id }}" onclick="return confirm('Are you sure you want to proceed for approval?');" class="btn btn-sm btn-clean btn-icon" title ="">
 																			<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo13\dist/../src/media/svg/icons\Files\Folder-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 																						<rect x="0" y="0" width="24" height="24"/>
@@ -306,8 +307,31 @@
 		
 		// Add a new row when the modal is shown
 		$('#inputDatagridModal').on('show.bs.modal', function() {
-			addRow();
-		});
+			$('#btnAdd').click(function() {	
+				var dataValue = $(this).data('value');
+				var addNewRowButton = $('#addNewRow');
+				addNewRowButton.data('dataValue', dataValue);
+
+				
+				var newRow = $('<tr></tr>');
+					// newRow.append('<td>' + dataValue + '</td>');
+					newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" ></td>');
+					newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="text" name="UOM[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="Barcode[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="Discrepancy[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="date" name="ExpirationDate[]"></td>');
+					newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
+				// Add more cells as needed
+				$('tbody').append(newRow);
+	
+
+	});
+});
 
 		// Save the datagrid data when the "Save Data" button is clicked
 		$('#saveDatagridData').on('click', function() {
@@ -315,25 +339,28 @@
 		});
 	});
 
+	
 	$('#addNewRow').on('click', function() {
-    addRow();
-});
+		var storedDataValue = $(this).data('dataValue');
+				addRow(storedDataValue);
+			});
 
-	function addRow() {
-		var newRow = $('<tr></tr>');
-		newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="text" name="UOM[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="number" name="Barcode[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="number" name="Discrepancy[]"></td>');
-			newRow.append('<td><input class="form-control col-10" type="date" name="ExpirationDate[]"></td>');
-			newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
-		// Add more cells as needed
-		$('tbody').append(newRow);
-	}
+		function addRow(storedDataValue) {
+			var newRow = $('<tr></tr>');
+				newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" disabled></td>');
+				newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="text" name="UOM[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="Barcode[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="Discrepancy[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="date" name="ExpirationDate[]"></td>');
+				newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
+			// Add more cells as needed
+			$('tbody').append(newRow);
+		}
 	
 	$('#saveDatagridData').on('click', function() {
     var formData = $('#inputDatagridForm').serialize();

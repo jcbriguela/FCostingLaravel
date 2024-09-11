@@ -62,7 +62,7 @@
 																			
 																			<div class="card-body">
 																				<!--begin: Datatable-->
-																				<table class="table">
+																				<table class="table" id="approvalTbl">
 																<thead>
 																	<th class="pl-0" style="width: 20px">
 																			<label class="checkbox checkbox-lg checkbox-inline">
@@ -73,13 +73,14 @@
 																	<th style="min-width: 100px">Item Code</th>
 																	<th style="min-width: 100px">Description</th>
 																	<th style="min-width: 100px">Unit</th>
-																	<th style="min-width: 100px">Qty PO</th>
+																	<th style="min-width: 100px">SO Qty</th>
 																	<th style="min-width: 100px">Actual Received</th>
 																	<th style="min-width: 100px">Discrepancy</th>
 																	<th style="min-width: 100px">Remarks</th>
 																	<th class="pr-0 text-right" style="min-width: 100px">action</th>
 																</thead>
 																<tbody>
+														@forelse ($data as $row)
 																<tr>
                                                     <td class="pl-0">
 															<label class="checkbox checkbox-lg checkbox-inline">
@@ -87,29 +88,13 @@
 																<span></span>
 															</label>
 														</td>
-                                                        <td>
-																<span>107D9A</span>
-														</td>
-                                                        <td>
-																<span>Apple Pie</span>
-														</td>
-                                                        <td>
-																<span>Whole</span>
-														</td>
-                                                       
-                                                        <td>
-																<span>5</span>
-														</td>
-                                                        <td>
-                                                        <span>5</span>
-
-                                                        </td>
-                                                        <td>
-																<span>5</span>
-														</td>
-                                                        <td>
-                                                            <span class="form-text text-muted"></span>
-                                                        </td>
+														<td>{{$row->ItemCode}}</td>
+														<td>{{$row->InventoryName}}</td>
+														<td>{{$row->Value}}</td>
+														<td>{{$row->PO_QTY}}</td>
+														<td>{{$row->REC_QTY}}</td>
+														<td id="difference"></td>
+														<td><span class="form-text text-muted">{{$row->Remarks}}</span></td>
 														<td class="pr-0 text-right">
                                                             <div class="btn-group">
 																<button type="button" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -127,13 +112,18 @@
                                                                 <div class="dropdown-menu">
                                                                     @csrf
                                                                     <meta name="csrf-token" content="{{ csrf_token() }}">
-                                                                        <li><a class="dropdown-item" href="#" data-status="1">Approved</a></li>
-                                                                        <li><a class="dropdown-item" href="#" data-status="2">Disapproved</a></li>
+                                                                        <li><a class="dropdown-item" href="#" data-status="1" data-value="{{ $row->id }}">Approved</a></li>
+                                                                        <li><a class="dropdown-item" href="#" data-status="2" data-value="{{ $row->id }}">Disapproved</a></li>
                                                                     </meta>
                                                                 </div>
 															</div>
 														</td>
 													</tr>
+													@empty
+													<tr>
+														<td colspan="17">No data found.</td>
+													</tr>
+													@endforelse
 													<tr>
                                                     <td class="pl-0">
 															<label class="checkbox checkbox-lg checkbox-inline">
@@ -528,6 +518,45 @@
                                     
 							
 						</div>
+<script>
 
+	var table = document.getElementById("approvalTbl");
+	var rows = table.getElementsByTagName("tr");
+
+	for (var i = 1; i < rows.length; i++) {
+	var cells = rows[i].getElementsByTagName("td");  
+
+	var value1 = parseInt(cells[4].textContent);
+	var value2 = parseInt(cells[5].textContent);
+	var difference = value1 - value2;
+
+	cells[2].textContent = difference;
+	}	
+
+	$(document).ready(function() {
+		$('.dropdown-item').click(function() {
+			var status = $(this).data('status');
+			var id = $(this).data('value');
+
+			$.ajax({
+				url: '/update-status', // Replace with your controller route
+				type: 'POST',
+				data: {
+					status: status,
+					id: id,
+					_token: '{{ csrf_token() }}' // Add CSRF token if using CSRF protection
+				},
+				success: function(response) {
+					console.log(response); // Handle the response from the controller
+					alert(response);
+				},
+				error: function(error) {
+					console.error(error); // Handle errors
+				}
+			});
+		});
+	});
+
+</script>
 
 @endsection

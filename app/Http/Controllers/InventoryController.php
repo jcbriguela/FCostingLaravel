@@ -65,13 +65,19 @@ class InventoryController extends Controller
      */
     public function create($id)
     {
-        
-        // // Optionally, return a view with the data if needed
-         $ascending = 1; // Default to ascending order
+       //  $ascending = 1; // Default to ascending order
         // $branchId = auth()->user()->branchid; // Default to ascending order
         // Call the stored procedure
-        $data = DB::select("CALL SP_GETTRANSACTIONDETAILS_HEADERID(?)", [$ascending]); 
+        // $data = DB::select("CALL SP_GETTRANSACTIONDETAILS_HEADERID(?)", [$id]); 
 
+        $data = DB::table('transactiondetails as a')
+        ->leftJoin('productmasterfile as b', 'a.ItemCode', '=', 'b.InventoryId')
+        ->leftJoin('settings as c', 'b.UOM', '=', 'c.id')
+        ->select('a.*', 'b.*','c.*') // Select all columns from both tables
+        ->where('a.TransactionHeaderId', $id) // Filter based on provided or request ID
+        ->get(); 
+
+        // dd($data);
         return view('Prototype.Inventory.InventoryList',compact('data'));
 
     }

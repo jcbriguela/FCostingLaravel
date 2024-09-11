@@ -159,9 +159,9 @@
 																								<thead>
 																									<tr>
 																										<th style="min-width: 150px">Receiving Date</th>
-																										<th style="min-width: 150px">Description</th>
 																										<th style="min-width: 150px">Item Code</th>
-																										<th style="min-width: 150px">PO Quantity</th>
+																										<th style="min-width: 150px">Description</th>
+																										<th style="min-width: 150px">SO Quantity</th>
 																										<th style="min-width: 150px">Record Quantity</th>
 																										<th style="min-width: 150px">UOM</th>
 																										<th style="min-width: 150px">Barcode</th>
@@ -306,6 +306,22 @@ $(document).ready(function() {
 		$('#saveDatagridData').on('click', function() {
 			saveDatagridData();
 		});
+
+		$('#saveDatagridData').on('click', function() {
+    var formData = $('#inputDatagridForm').serialize();
+    $.ajax({
+        url: "{{ route('save_datagrid_data') }}",	
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            console.log(response); // Handle the success response
+            $('#inputDatagridModal').modal('hide');
+        },
+        error: function(error) {
+            console.log(error); // Handle the error response
+        }
+    });
+});
 
 </script>
 @endsection

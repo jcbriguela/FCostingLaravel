@@ -11,8 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RolesAndPermissionController;
 use App\Http\Controllers\ReceivingController;
 use App\Http\Controllers\InventoryController;
-
-
+use App\Http\Controllers\ReferencesController;
 
 
 /*
@@ -113,12 +112,7 @@ Route::get('/ApprovalList',[InventoryController::class,'index']);
 Route::POST('/storePO', [ReceivingController::class, 'storePO']);
 // Route::GET('/getReceivingData', [ReceivingController::class, '']);
 Route::get('/getReceivingData', 'ReceivingDataController@createPO')->name('getReceivingData');
-Route::get('/PurchaseOrder',[ReceivingController::class,'indexPO']);
-
-
-
-
-
+Route::get('/SalesOrder',[ReceivingController::class,'indexPO']);
 
 Route::get('/', function () {
     return view('auth.login');
@@ -145,8 +139,18 @@ Route::post('/logout', LoginController::class)->name('logout');
 
 //Receiving
 Route::get('/get_last_id', [ReceivingController::class, 'create'])->name('get_last_id');
-Route::post('/save-datagrid-data', [ReceivingController::class, 'store'])->name('save_datagrid_data');
+Route::post('/save_datagrid_data', [ReceivingController::class, 'store'])->name('save_datagrid_data');
 Route::get('/rec-show-list/id', 'ReceivingController@show')->name('rec-show-list');
+
+Route::post('/update-status', [ReceivingController::class, 'update'])->name('update-status');
+
+
+
+//Receferences
+Route::GET('References', [ReferencesController::class, 'index']);
+Route::POST('store-reference',[ReferencesController::class,'store']);
+Route::GET('select-module', [ReferencesController::class, 'show'])->name('select-module');
+
 
 
 require __DIR__.'/auth.php';

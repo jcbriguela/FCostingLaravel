@@ -36,7 +36,8 @@ class ReceivingController extends Controller
     //     ->get();
 
         $ascending = 1; // Default to ascending order
-        $branchId = auth()->user()->branchid; // Default to ascending order
+        $branchId = auth()->user()->branchid;
+        // dd($branchId); // Default to ascending order
         // Call the stored procedure
         $data = DB::select("CALL SP_CHECK_RECEIVING_ONLOAD(?, ?)", [$ascending, $branchId]); 
 
@@ -138,30 +139,30 @@ class ReceivingController extends Controller
 
    // dd(session()->all());
   // dd($request->input());
+
+  //Laravel Saving
     // Create a new transaction header model instance
-    $transactionHeaderModel = new TransactionHeaderModel;
-    $transactionHeaderModel->TransactionType = 'REC';
+    // $transactionHeaderModel = new TransactionHeaderModel;
+    // $transactionHeaderModel->TransactionType = 'REC';
 
-// Check if ReceivingDate is present in the request and access it using a default value if empty
-    $transactionHeaderModel->ReceivingDate = $request->input('ReceivingDate', null)[0];
-    $transactionHeaderModel->ReceivedById = auth()->user()->id;
-    $transactionHeaderModel->BranchId = auth()->user()->branchid;
+    // // Check if ReceivingDate is present in the request and access it using a default value if empty
+    // $transactionHeaderModel->ReceivingDate = $request->input('ReceivingDate', null)[0];
+    // $transactionHeaderModel->ReceivedById = auth()->user()->id;
+    // $transactionHeaderModel->BranchId = auth()->user()->branchid;
 
-    // Check if data exists based on your criteria (e.g., using a unique constraint)
-    $existingData = $transactionHeaderModel::whereDate('ReceivingDate', $transactionHeaderModel->ReceivingDate)
-                                        ->where('ReceivedById', $transactionHeaderModel->ReceivedById)
-                                        ->where('BranchId', $transactionHeaderModel->BranchId)
-                                        ->first();
-
-
-    if (!$existingData) {
-        // Data doesn't exist, so save it
-        $transactionHeaderModel->save();
-        $existingDataId = $existingData->id;
-    } else {
-        $existingDataId = $existingData->id;
-    }
-dd($existingDataId);
+    // // Check if data exists based on your criteria (e.g., using a unique constraint)
+    // $existingData = $transactionHeaderModel::whereDate('ReceivingDate', $transactionHeaderModel->ReceivingDate)
+    //                                     ->where('ReceivedById', $transactionHeaderModel->ReceivedById)
+    //                                     ->where('BranchId', $transactionHeaderModel->BranchId)
+    //                                     ->first();
+    // if (!$existingData) {
+    //     // Data doesn't exist, so save it
+    //     $transactionHeaderModel->save();
+    //     $existingDataId = $existingData->id;
+    // } else {
+    //     $existingDataId = $existingData->id;
+    // }
+// dd($existingDataId);
     // // Convert the transactionHeaderModel object to an array
     // $transactionHeaderArray = $transactionHeaderModel->toArray();
 
@@ -171,31 +172,67 @@ dd($existingDataId);
 // Process the data and save it to the transaction details and product tables
 
 foreach ($request->input('ItemCode') as $index => $itemCode) {
-    // Find or create the product
-    $productModel = ProductModel::firstOrCreate([
-        'ItemCode' => $itemCode,
-        'Description' => $request->input('Description')[$index],
-        'UOM' => $request->input('UOM')[$index],
-        'Barcode' => $request->input('Barcode')[$index],
-        'TransactionHeaderID' => $existingDataId,
-    ]);
+    // // Find or create the product
+    // $productModel = ProductModel::firstOrCreate([
+    //     'ItemCode' => $itemCode,
+    //     'Description' => $request->input('Description')[$index],
+    //     'UOM' => $request->input('UOM')[$index],
+    //     'Barcode' => $request->input('Barcode')[$index],
+    //     'TransactionHeaderID' => $existingDataId,
+    // ]);
 
     // Create a new transaction details model instance and associate it with the header and product
     $transactionDetailsModel = new TransactionDetailsModel;
-    $transactionDetailsModel->TransactionHeaderID = $existingDataId ;
+    // $transactionDetailsModel->TransactionHeaderID = $existingDataId ;
+    $transactionDetailsModel->TransactionHeaderID = $request->input('TransactionHeaderID')[$index] ;
     $transactionDetailsModel->ItemCode = $itemCode;
     $transactionDetailsModel->PO_QTY = $request->input('PO_QTY')[$index];
     $transactionDetailsModel->REC_QTY = $request->input('REC_QTY')[$index];
     $transactionDetailsModel->RECUserID = auth()->user()->id;
+    $transactionDetailsModel->ReceivedById = auth()->user()->id;
     $transactionDetailsModel->save();
-
    }
+// Return a success message or redirect
+ return redirect()->back()->with('success', 'Data saved successfully!');
 
+        //SP SAVING
 
-    // Return a success message or redirect
-    return redirect()->back()->with('success', 'Data saved successfully!');
+        // $data = $request->all();
+
+        // // Extract data from the request array
+        // $TransactionHeaderIDs = $data['TransactionHeaderID'];
+        // $itemCodes = $data['ItemCode'];
+        // $poQtys = $data['PO_QTY'];
+        // $recQtys = $data['REC_QTY'];
+        // $expiryDates = $data['ExpirationDate'];
+        // $barcodes = $data['Barcode'];
+        // $remarks = $data['Remarks'];
+
+        // // Validate the extracted data (optional)
+
+        // // Prepare the data for the stored procedure
+        // $params = [];
+        // foreach ($TransactionHeaderIDs as $index => $TransactionHeaderID) {
+        //     $params[] = [
+        //         'TransactionHeaderID' => $TransactionHeaderID,
+        //         'ItemCode' => $itemCodes[$index],
+        //         'PO_QTY' => $poQtys[$index],
+        //         'REC_QTY' => $recQtys[$index],
+        //         'RECUserID' => auth()->user()->id,
+        //         'ReceivedById' => auth()->user()->id,
+        //         'Remarks' => $remarks[$index],
+        //     ];
+        // }
+        // // Convert the params array to a string using json_encode
+        // $paramsString = json_encode($params);
+
+        // // Call the stored procedure
+        // DB::statement('CALL SP_INSERT_RECEIVINGITEMS(?, ?, ?, ?, ?, ?, ?)', [$paramsString]);
+
+        // // Handle success or failure
+        // return redirect()->back()->with('success', 'Data saved successfully!');
     
-    }
+    }   
 
     /**
      * Display the specified resource.
@@ -250,10 +287,32 @@ foreach ($request->input('ItemCode') as $index => $itemCode) {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'status' => 'required|integer',
+            'id' => 'required|integer'
+        ]);
+
+        $status = $validatedData['status'];
+        $id = $validatedData['id'];
+        $remarks ="";
+
+        // Call your stored procedure
+        $result = DB::statement('CALL SP_UPDATE_TRANSACTIONDETAILS_APPROVED(?, ?, ?, ?)', [
+            $id,
+            $status, 
+            auth()->user()->id,
+            $remarks
+        ]);
+
+        if ($result) {
+            return response()->json(['message' => 'Status updated successfully']);
+        } else {
+            return response()->json(['message' => 'Error updating status'], 500);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -281,45 +340,44 @@ foreach ($request->input('ItemCode') as $index => $itemCode) {
 
     public function storePO(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'TransactionType' => 'required',
-            'TotalItem' => 'required|numeric',
-            'SupplierID' => 'required|numeric',
-            'DeliveryReceiptNo' => 'required',
-            'POReceiptNo' => 'required',
-        ]);
-
-        // Extract data from the request
-        $transactionType = $request->input('TransactionType');
+        // Extract data from the validated request
+        $data = $request->all();
+        $TransactionType = $data['TransactionType'];
         $orderDate = now();
         $receivingDate = now();
-        $totalItem = $request->input('TotalItem');
-        $encoderId = auth()->user()->id;
-        $supplierID = $request->input('SupplierID');
-        $deliveryReceiptNo = $request->input('DeliveryReceiptNo');
-        $poReceiptNo = $request->input('POReceiptNo');
-        $encoderId = auth()->user()->id;
+        $totalItem = $data['TotalItem'];
+        
 
-        // Call the stored procedure
-        DB::select('CALL SP_INSERT_TRANSACTIONHEADER(?, ?, ?, ?, ?, ?, ?)', [
-            $transactionType,
+         // Call the stored procedure
+         $results = DB::select('CALL SP_INSERT_TRANSACTIONHEADER(?, ?, ?, ?, ?, ?, ?)', [
+            $TransactionType,
             $orderDate,
             $receivingDate,
             $totalItem,
-            $encoderId,
-            $supplierID,
-            // $deliveryReceiptNo,
-            // $poReceiptNo,
-            $encoderId,
+            auth()->user()->id,
+            1,
+           auth()->user()->branchid
+
         ]);
 
-        $ascending = 1; // Default to ascending order
-        $branchId = auth()->user()->branchid; // Default to ascending order
-        // Call the stored procedure
-        $data = DB::select("CALL SP_CHECK_RECEIVING_ONLOAD(?, ?)", [$ascending, $branchId]); 
+        if ($results) {
+            
+            $ascending = 1; // Default to ascending order
+            $branchId = auth()->user()->branchid; // Default to ascending order
+            // Call the stored procedure
+            $data = DB::select("CALL SP_CHECK_RECEIVING_ONLOAD(?, ?)", [$ascending, $branchId]); 
 
-         return view('Prototype.Inventory.PurchaseOrder', compact('data'));
+            return view('Prototype.Inventory.PurchaseOrder', compact('data'));
+        } else {
+
+        // dd("error");
+        return redirect()->back()->withErrors(['error' => 'An error occurred while saving the data. Please try again.']);
+            // An error occurred while executing the stored procedure
+            // Handle the error appropriately
+        }
+
+
+
 
     }
 }

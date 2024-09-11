@@ -10,7 +10,7 @@
 									<!--begin::Page Heading-->
 									<div class="d-flex align-items-baseline flex-wrap mr-5">
 										<!--begin::Page Title-->
-										<h5 class="text-dark font-weight-bold my-1 mr-5">Purchase Order</h5>
+										<h5 class="text-dark font-weight-bold my-1 mr-5">Sales Order</h5>
 										<!--end::Page Title-->
 										<!--begin::Breadcrumb-->
 										<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -37,7 +37,7 @@
 									<!--begin::Card-->
 										<div class="card card-custom gutter-b example example-compact">
 												<div class="card-header">
-													<h3 class="card-title">PO Form</h3>
+													<h3 class="card-title">SO Form</h3>
 												</div>
 												<!--begin::Form-->
 												<form action="/storePO" method = "POST" class="form">
@@ -95,7 +95,7 @@
 										<div class="card card-custom">
 												<div class="card-header flex-wrap py-5">
 													<div class="card-title">
-														<h3 class="card-label">PO List
+														<h3 class="card-label">SO List
 													</div>
 												</div>
 												<div class="card-body">
