@@ -39,9 +39,19 @@ class ReceivingController extends Controller
         $branchId = auth()->user()->branchid;
         // dd($branchId); // Default to ascending order
         // Call the stored procedure
+        $module = DB::table('settings')
+        ->select('Module') // Select all columns from both tables
+        ->groupby('Module') // Filter based on provided or request ID
+        ->get(); 
+
+        $Moduledata = DB::table('settings')
+        ->select('*') // Select all columns from both tables
+        ->get(); 
+
+
         $data = DB::select("CALL SP_CHECK_RECEIVING_ONLOAD(?, ?)", [$ascending, $branchId]); 
 
-        return view('Prototype.Inventory.Receiving',compact('data'));
+        return view('Prototype.Inventory.Receiving',compact('data','module','Moduledata'));
         // return view('Prototype.Inventory.InventoryList');
     }
 
@@ -375,9 +385,10 @@ foreach ($request->input('ItemCode') as $index => $itemCode) {
             // An error occurred while executing the stored procedure
             // Handle the error appropriately
         }
-
-
-
-
+    }
+    public function getDropdownData()
+    {
+        $items = Item::all(); // Replace with your model and query
+        return response()->json($items);
     }
 }

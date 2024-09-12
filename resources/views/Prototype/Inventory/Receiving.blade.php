@@ -267,6 +267,46 @@
 							
 
 <script type="text/javascript">
+
+	// Call the function on page load
+    window.onload = populateDropdown;
+
+	// Call the function to populate the dropdown on page load or when needed
+	populateDropdown();
+
+	function fetchData() {
+	
+	return new Promise((resolve, reject) => {
+		const connection = /* Your code to establish database connection */;
+		const query = "SELECT id, Module FROM settings"; // Replace with your actual query
+
+		connection.query(query, (error, results) => {
+		if (error) {
+			reject(error); // Handle database errors
+		} else {
+			resolve(results);
+		}
+		connection.end(); // Close the connection (optional)
+		});
+	});
+	}
+
+	function populateDropdown() {
+	const dropdown = document.querySelector('select[name="ItemCode[]"]');
+	dropdown.innerHTML = '<option value="">Select Item</option>'; // Clear existing options
+
+	fetchData().then(data => {
+		data.forEach(item => {
+		const option = document.createElement('option');
+		option.value = item.id; // Replace 'id' with the actual column name for the identifier
+		option.text = item.Module; // Replace 'name' with the actual column name for the display value
+		dropdown.appendChild(option);
+		});
+	});
+	}
+
+	
+
 	$(document).ready(function() {
     // Function to add a new row to the datagrid
 		function addRow() {
@@ -285,7 +325,7 @@
 
 					var newRow = $('<tr></tr>');
 					newRow.append('<td><input class="form-control col-10" type="date" name="RecievingDate[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
+					newRow.append('<td><select class="form-control col-10" name="ItemCode[]"><option value="">Select Item</option></select></td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
@@ -317,7 +357,7 @@
 					// newRow.append('<td>' + dataValue + '</td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" ></td>');
 					newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
+					newRow.append('<td><select class="form-control col-10" name="ItemCode[]"><option value="">Select Item</option></select></td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
@@ -349,7 +389,7 @@
 			var newRow = $('<tr></tr>');
 				newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" disabled></td>');
 				newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
-				newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
+				newRow.append('<td><select class="form-control col-10" name="ItemCode[]"><option value="">Select Item</option></select></td>');
 				newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
 				newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
 				newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');

@@ -210,29 +210,6 @@
 										</ul>
 									</div>
 								@endif
-									<!-- FOR CHECKING MODULE 
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item" aria-haspopup="true">
-												<a href="/ApprovalList" class="menu-link">
-													<span class="menu-text">For Approval List</span>
-												</a>
-											</li>
-										</ul>
-									</div> -->
-									@if(auth()->user()->role == 'Approver' || auth()->user()->role == 'Admin') 
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item" aria-haspopup="true">
-												<a href="/ApprovalList" class="menu-link">
-													<span class="menu-text">Item List</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-									@endif
 								</li>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
@@ -304,7 +281,7 @@
 										</ul>
 									</div>
 								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<!-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-console"></i>
 										<span class="menu-text">Approver</span>
@@ -338,141 +315,6 @@
 														</li>
 													</ul>
 												</div>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<!-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="javascript:;" class="menu-link menu-toggle">
-										<i class="menu-icon flaticon2-telegram-logo"></i>
-										<span class="menu-text">Inventory Management</span>
-										<i class="menu-arrow"></i>	
-									</a>
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item menu-item-parent" aria-haspopup="true">
-												<span class="menu-link">
-													<span class="menu-text">Inventory Management</span>
-												</span>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-line">
-														<span></span>
-													</i>
-													<span class="menu-text">Sale Quantity</span>
-												</a>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-line">
-														<span></span>
-													</i>
-													<span class="menu-text">Average Check size</span>
-												</a>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-line">
-														<span></span>
-													</i>
-													<span class="menu-text">Customer Segmentation</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<li class="menu-item" aria-haspopup="true">
-									<a href="javascript:;" class="menu-link">
-										<i class="menu-icon flaticon2-laptop"></i>
-										<span class="menu-text">Sales</span>
-									</a>
-								</li> -->
-								
-								<!-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-									<a href="javascript:;" class="menu-link menu-toggle">
-										<i class="menu-icon flaticon2-browser-2"></i>
-										<span class="menu-text">Report</span>
-										<i class="menu-arrow"></i>	
-									</a>
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item menu-item-parent" aria-haspopup="true">
-												<span class="menu-link">
-													<span class="menu-text">Reports</span>
-												</span>
-											</li>
-											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-												<a href="javascript:;" class="menu-link menu-toggle">
-													<i class="menu-bullet menu-bullet-line">
-														<span></span>
-													</i>
-													<span class="menu-text">Sale Amount</span>
-													<i class="menu-arrow"></i>
-												</a>
-												<div class="menu-submenu">
-													<i class="menu-arrow"></i>
-													<ul class="menu-subnav">
-														<li class="menu-item" aria-haspopup="true">
-															<a href="#" class="menu-link">
-																<i class="menu-bullet menu-bullet-dot"></i>
-																	<span></span>
-																</i>
-																<span class="menu-text">Overview</span>
-															</a>
-														</li>
-														<li class="menu-item" aria-haspopup="true">
-															<a href="#" class="menu-link">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Hourly</span>
-															</a>
-														</li>
-														<li class="menu-item" aria-haspopup="true">
-															<a href="#" class="menu-link">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Daily</span>
-															</a>
-														</li>
-														<li class="menu-item" aria-haspopup="true">
-															<a href="#" class="menu-link">
-																<i class="menu-bullet menu-bullet-dot">
-																	<span></span>
-																</i>
-																<span class="menu-text">Weekly</span>
-															</a>
-														</li>
-													</ul>
-												</div>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-line">
-														<span></span>
-													</i>
-													<span class="menu-text">Sale Quantity</span>
-												</a>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-line">
-														<span></span>
-													</i>
-													<span class="menu-text">Average Check size</span>
-												</a>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-												<a href="#" class="menu-link">
-													<i class="menu-bullet menu-bullet-line">
-														<span></span>
-													</i>
-													<span class="menu-text">Customer Segmentation</span>
-												</a>
 											</li>
 										</ul>
 									</div>
@@ -580,47 +422,11 @@
 													<i class="menu-bullet menu-bullet-dot"></i>
 														<span></span>
 													</i>
-													<span class="menu-text">References</span>
+													<span class="menu-text">Reference</span>
 												</a>
 											</li>
 										</ul>
 									</div>
-								@if(auth()->user()->role == 'Admin') 
-
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item" aria-haspopup="true">
-												<a href="/Receiving" class="menu-link">
-													<span class="menu-text">Masterlist</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								@endif
-									<!-- FOR CHECKING MODULE 
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item" aria-haspopup="true">
-												<a href="/ApprovalList" class="menu-link">
-													<span class="menu-text">For Approval List</span>
-												</a>
-											</li>
-										</ul>
-									</div> -->
-									@if(auth()->user()->role == 'Approver' || auth()->user()->role == 'Admin') 
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item" aria-haspopup="true">
-												<a href="/ApprovalList" class="menu-link">
-													<span class="menu-text">Item List</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-									@endif
 								</li>
 								<li class="menu-item" aria-haspopup="true">
 									<a href="/onGoingDev" class="menu-link">

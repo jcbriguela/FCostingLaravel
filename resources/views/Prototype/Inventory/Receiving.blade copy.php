@@ -308,19 +308,19 @@ $(document).ready(function() {
 		});
 
 		$('#saveDatagridData').on('click', function() {
-    var formData = $('#inputDatagridForm').serialize();
-    $.ajax({
-        url: "{{ route('save_datagrid_data') }}",	
-        type: 'POST',
-        data: formData,
-        success: function(response) {
-            console.log(response); // Handle the success response
-            $('#inputDatagridModal').modal('hide');
-        },
-        error: function(error) {
-            console.log(error); // Handle the error response
-        }
-    });
+			var formData = $('#inputDatagridForm').serialize();
+			$.ajax({
+				url: "{{ route('save_datagrid_data') }}",	
+				type: 'POST',
+				data: formData,
+				success: function(response) {
+					console.log(response); // Handle the success response
+					$('#inputDatagridModal').modal('hide');
+				},
+				error: function(error) {
+					console.log(error); // Handle the error response
+				}
+			});
 });
 
 </script>
