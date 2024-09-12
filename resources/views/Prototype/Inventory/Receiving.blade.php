@@ -190,9 +190,11 @@
 																		<th scope="col">Order Date</th>
 																		<th scope="col">Receiving Date</th>
 																		<th scope="col">Total Items</th>
+																		<th scope="col">Total Quantity</th>
+																		<th scope="col">Actual Record Count</th>
+																		<th scope="col">Quantity Variance</th>
 																		<th scope="col">Status Item Count</th>
 																		<th scope="col">Receiving Status</th>
-																		<th scope="col">Approved By</th>
 																		<th scope="col">Created Date</th>
 																		<th scope="col">Actions</th>
 																	</tr>
@@ -206,13 +208,15 @@
 																		<td>{{ $row->OrderDate }}</td>
 																		<td>{{ $row->ReceivingDate }}</td>
 																		<td>{{ $row->Total_Item }}</td>
+																		<td>{{ $row->TOTALQUANTITY }}</td>
+																		<td>{{ $row->Actual_Rec_Count }}</td>
+																		<td>{{ $row->QuatityVariance }}</td>
+																		<td>{{ $row->StatusItemCount }}</td>
 																		<td>{{ $row->ReceivingStatus }}</td>
-																		<td>{{ $row->ReceivingStatus }}</td>
-																		<td>{{ $row->ApprovedById }}</td>
 																		<td>{{ $row->CreatedDate }}</td>
 																		<td>
 																			<!-- <button id ="btnAdd" data-value="{{ $row->Id }}"   class="btn btn-primary btn-sm  btn-icon" > -->
-																		<button id ="btnAdd" data-value="{{ $row->Id }}" data-toggle="modal" data-target="#inputDatagridModal"  class="btn btn-primary btn-sm  btn-icon" >
+																		<button id ="btnAdd" data-value="{{ $row->Id }}" data-value2="{{ $row->Total_Item }}" data-toggle="modal" data-target="#inputDatagridModal"  class="btn btn-primary btn-sm  btn-icon" >
 																			+
 																			</button>
 																			<a href="/inventory-list/{{ $row->Id }}" onclick="return confirm('Are you sure you want to proceed for approval?');" class="btn btn-sm btn-clean btn-icon" title ="">
@@ -268,11 +272,14 @@
 
 			$('#btnAdd').click(function() {	
 				var dataValue = $(this).data('value');
+				var dataValue2 = $(this).data('value2');
+
 				var addNewRowButton = $('#addNewRow');
 				addNewRowButton.data('dataValue', dataValue);
 
-				alert(dataValue);
+				var totalRowsToAdd = parseInt(dataValue2);
 
+				for (var i = 0; i < totalRowsToAdd; i++) {
 				var newRow = $('<tr></tr>');
 					// newRow.append('<td>' + dataValue + '</td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" ></td>');
@@ -288,6 +295,7 @@
 					newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
 				// Add more cells as needed
 				$('tbody').append(newRow);
+				}
 			});
 		
 

@@ -365,17 +365,19 @@ foreach ($request->input('ItemCode') as $index => $itemCode) {
         $orderDate = now();
         $receivingDate = now();
         $totalItem = $data['TotalItem'];
+        $totalqty = $data['TOTALQUANTITY'];
         
 
          // Call the stored procedure
-         $results = DB::select('CALL SP_INSERT_TRANSACTIONHEADER(?, ?, ?, ?, ?, ?, ?)', [
+         $results = DB::select('CALL SP_INSERT_TRANSACTIONHEADER(?, ?, ?, ?, ?, ?, ?,?)', [
             $TransactionType,
             $orderDate,
             $receivingDate,
             $totalItem,
+            $totalqty,            
             auth()->user()->id,
             1,
-           auth()->user()->branchid
+           auth()->user()->branchid,
 
         ]);
 

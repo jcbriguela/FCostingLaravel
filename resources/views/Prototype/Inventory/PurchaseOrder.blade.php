@@ -56,6 +56,12 @@
 																<input class="form-control" type="number" value="0" id="totItem-input" name ="TotalItem" />
 															</div>
 														</div>
+														<div class="form-group row">
+															<label for="totItem-input" class="col-4 col-form-label">Total Quantity</label>
+															<div class="col-8">
+																<input class="form-control" type="number" value="0" id="totqty-input" name ="TOTALQUANTITY" />
+															</div>
+														</div>
 														<!-- <div class="form-group row">
 															<label for="supId-input" class="col-4 col-form-label">Supplier</label>
 															<div class="col-8">
@@ -107,7 +113,7 @@
 															<th>Transaction Type</th>
 															<th>Order Date</th>
 															<th>Total Items</th>
-															<th>Status Item Count</th>
+															<th>Status Count</th>
 															<th>Receiving Status</th>
 															<!-- <th>Received By</th> -->
 															<th>Created Date</th>
@@ -124,7 +130,8 @@
 																<td>{{ $row->TransactionType }}</td>
 																<td>{{ $row->OrderDate }}</td>
 																<td>{{ $row->Total_Item }}</td>
-																<td></td>
+																 
+																<td>{{ $row->StatusItemCount }}</td>
 																<td>{{ $row->ReceivingStatus }}</td>
 																<td>{{ $row->CreatedDate }}</td>
 																<!-- <td>{{ $row->ReceivedById }}</td> -->
