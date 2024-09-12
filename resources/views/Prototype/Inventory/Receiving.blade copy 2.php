@@ -149,7 +149,7 @@
 																						<form id="inputDatagridForm"> 
 																							@csrf	
 																							<div class="table-responsive">
-																							<table class="table table-bordered" id="dataTable">
+																							<table class="table table-bordered">
 																								<thead>
 																									<tr>
 																										<th style="min-width: 150px">#</th>
@@ -194,7 +194,7 @@
 																		<th scope="col">Receiving Status</th>
 																		<th scope="col">Approved By</th>
 																		<th scope="col">Created Date</th>
-																		<th scope="col">Actions</th>
+																		<th scope="col" style="min-width: 150px">Actions</th>
 																	</tr>
 																</thead>
 																<tbody>
@@ -211,9 +211,14 @@
 																		<td>{{ $row->ApprovedById }}</td>
 																		<td>{{ $row->CreatedDate }}</td>
 																		<td>
-																			<!-- <button id ="btnAdd" data-value="{{ $row->Id }}"   class="btn btn-primary btn-sm  btn-icon" > -->
-																		<button id ="btnAdd" data-value="{{ $row->Id }}" data-toggle="modal" data-target="#inputDatagridModal"  class="btn btn-primary btn-sm  btn-icon" >
-																			+
+																			<button id ="btnAdd" data-toggle="modal" data-target="#inputDatagridModal"  class="btn btn-sm  btn-icon" data-value="{{ $row->Id }}">
+																			<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo13\dist/../src/media/svg/icons\Files\File-plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																					<polygon points="0 0 24 0 24 24 0 24"/>
+																					<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+																					<path d="M11,14 L9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 L11,12 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,12 L15,12 C15.5522847,12 16,12.4477153 16,13 C16,13.5522847 15.5522847,14 15,14 L13,14 L13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,14 Z" fill="#000000"/>
+																				</g>
+																			</svg><!--end::Svg Icon--></span>
 																			</button>
 																			<a href="/inventory-list/{{ $row->Id }}" onclick="return confirm('Are you sure you want to proceed for approval?');" class="btn btn-sm btn-clean btn-icon" title ="">
 																			<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo13\dist/../src/media/svg/icons\Files\Folder-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -262,22 +267,97 @@
 							
 
 <script type="text/javascript">
+
+	// Call the function on page load
+    window.onload = populateDropdown;
+
+	// Call the function to populate the dropdown on page load or when needed
+	populateDropdown();
+
+	function fetchData() {
+	
+	return new Promise((resolve, reject) => {
+		const connection = /* Your code to establish database connection */;
+		const query = "SELECT id, Module FROM settings"; // Replace with your actual query
+
+		connection.query(query, (error, results) => {
+		if (error) {
+			reject(error); // Handle database errors
+		} else {
+			resolve(results);
+		}
+		connection.end(); // Close the connection (optional)
+		});
+	});
+	}
+
+	function populateDropdown() {
+	const dropdown = document.querySelector('select[name="ItemCode[]"]');
+	dropdown.innerHTML = '<option value="">Select Item</option>'; // Clear existing options
+
+	fetchData().then(data => {
+		data.forEach(item => {
+		const option = document.createElement('option');
+		option.value = item.id; // Replace 'id' with the actual column name for the identifier
+		option.text = item.Module; // Replace 'name' with the actual column name for the display value
+		dropdown.appendChild(option);
+		});
+	});
+	}
+
+	
+
+	$(document).ready(function() {
+    // Function to add a new row to the datagrid
+		function addRow() {
+			$.ajax({
+					url: "\get_last_id", 
+					type: 'GET',
+					data: {
+            sessionBranch: "1",   //, // Pass the session branch variable
+            transactionType: "REC" // Pass the transaction type
+        },
+        	success: function(response) {
+            var data = response.data; // Assuming the response contains a 'data' property
+
+            // Iterate through the data and create rows
+            data.forEach(function(item) {
+
+					var newRow = $('<tr></tr>');
+					newRow.append('<td><input class="form-control col-10" type="date" name="RecievingDate[]"></td>');
+					newRow.append('<td><select class="form-control col-10" name="ItemCode[]"><option value="">Select Item</option></select></td>');
+					newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="text" name="UOM[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="Barcode[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="date" name="ExpirationDate[]"></td>');
+					newRow.append('<td><input class="form-control col-10" type="number" name="Discrepancy[]"></td>');
+					newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
+					// Add more cells as needed
+					$('tbody').append(newRow);
+			});
+			},
+			error: function(error) {
+				console.log('Error fetching last ID:', error);
+			}
+		});
+	}
+
 		
 		// Add a new row when the modal is shown
-		// $('#inputDatagridModal').on('show.bs.modal', function() {
-
+		$('#inputDatagridModal').on('show.bs.modal', function() {
 			$('#btnAdd').click(function() {	
 				var dataValue = $(this).data('value');
 				var addNewRowButton = $('#addNewRow');
 				addNewRowButton.data('dataValue', dataValue);
 
-				alert(dataValue);
-
+				
 				var newRow = $('<tr></tr>');
 					// newRow.append('<td>' + dataValue + '</td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" ></td>');
 					newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
+					newRow.append('<td><select class="form-control col-10" name="ItemCode[]"><option value="">Select Item</option></select></td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
@@ -288,66 +368,213 @@
 					newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
 				// Add more cells as needed
 				$('tbody').append(newRow);
-			});
-		
+	
+
+	});
+});
 
 		// Save the datagrid data when the "Save Data" button is clicked
-		// $('#saveDatagridData').on('click', function() {
-		// 	saveDatagridData();
-		// });
-	
-		$(document).ready(function() {
-	
-		$('#addNewRow').on('click', function() {
-			var storedDataValue = $(this).data('dataValue');
-					addRow(storedDataValue);
-				});
-
-			function addRow(storedDataValue) {
-				var newRow = $('<tr></tr>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" disabled></td>');
-					newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="UOM[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="number" name="Barcode[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="number" name="Discrepancy[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="date" name="ExpirationDate[]"></td>');
-					newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
-				// Add more cells as needed
-				$('tbody').append(newRow);
-			}
-	});
-
-
-	$(document).ready(function() {
 		$('#saveDatagridData').on('click', function() {
-		var formData = $('#inputDatagridForm').serialize();
-		$.ajax({
-			url: "{{ route('save_datagrid_data') }}",	
-			type: 'POST',
-			data: formData,
-			success: function(response) {
-				console.log(response); // Handle the success response
-				$('#inputDatagridModal').modal('hide');
-			},
-			error: function(error) {
-				console.log(error); // Handle the error response
-			}
-		});
+			saveDatagridData();
 		});
 	});
 
-function clearTable() {
-    var table = document.getElementById("dataTable");
-    var tbody = table.getElementsByTagName("tbody")[0];
-    tbody.innerHTML = ""; // Clears the table body content
+	
+	$('#addNewRow').on('click', function() {
+		var storedDataValue = $(this).data('dataValue');
+				addRow(storedDataValue);
+			});
+
+		function addRow(storedDataValue) {
+			var newRow = $('<tr></tr>');
+				newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" disabled></td>');
+				newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
+				newRow.append('<td><select class="form-control col-10" name="ItemCode[]"><option value="">Select Item</option></select></td>');
+				newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="text" name="UOM[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="Barcode[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="number" name="Discrepancy[]"></td>');
+				newRow.append('<td><input class="form-control col-10" type="date" name="ExpirationDate[]"></td>');
+				newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
+			// Add more cells as needed
+			$('tbody').append(newRow);
+		}
+	
+	$('#saveDatagridData').on('click', function() {
+    var formData = $('#inputDatagridForm').serialize();
+    $.ajax({
+        url: "{{ route('save_datagrid_data') }}",	
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            console.log(response); // Handle the success response
+            $('#inputDatagridModal').modal('hide');
+        },
+        error: function(error) {
+            console.log(error); // Handle the error response
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.btn-primary').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+
+          fetch('/rec-show-list/' + id, {
+            method: 'GET'
+          })
+          .then(response => response.json()) // Assuming the data is JSON
+			.then(data => {
+				populateDataGrid(data); // Call the separate function for populating the datagrid
+			})
+          .catch(error => console.error(error)); // Handle potential errors
+        });
+      });
+    });
+
+	function populateDataGrid(data) {
+  const dataGrid = document.getElementById('modalTable');
+  const tableBody = dataGrid.querySelector('tbody');
+
+  // Clear the table body before populating
+  tableBody.innerHTML = '';
+
+  if (Array.isArray(data)) {
+    data.forEach(item => {
+      const newRow = document.createElement('tr');
+
+      // Create cells and set content
+      const idCell = document.createElement('td');
+      idCell.textContent = item.id;
+      newRow.appendChild(idCell);
+
+      const checkboxCell = document.createElement('td'); // Assuming you need a checkbox cell
+      // ... (add checkbox logic)
+      newRow.appendChild(checkboxCell);
+
+      // ... (create and populate other cells as needed)
+
+      const editButtonCell = document.createElement('td');
+      const editButton = document.createElement('button');
+      editButton.type = 'button';
+      editButton.classList.add('btn', 'btn-primary',  
+ 'btn-sm', 'edit-btn');
+      editButton.textContent = 'Edit';
+      editButton.dataset.id = item.ProductCode; // Assuming 'ProductCode' is the edit identifier
+      editButtonCell.appendChild(editButton);
+      newRow.appendChild(editButtonCell);
+
+      // ... (append other cells)
+
+      tableBody.appendChild(newRow);
+    });
+  } else {
+    // Handle non-array data (e.g., display an error message)
+    console.error("Received data is not an array!");
+  }
 }
 
 
+$(document).ready(function() {
+  $('table').on('click', '#btnShow', function() { 
+    var buttonId = $(this).data('value');
+			alert(buttonId);
+			$.ajax({
+			type: 'GET',
+			url: '/rec-show-list/'+ id,
+			data: {
+				buttonValue: buttonId,
+				_token: $('meta[name="csrf-token"]').attr('content'),
+				id: buttonId
+    		},
+			success: function(jsondata) {
+				console.log('jsondata:', jsondata); // Check the JSON data
 
+				const dataGrid = document.getElementById('modalTable');
+				const tableBody = dataGrid.querySelector('tbody');
 
+				tableBody.innerHTML = '';
+
+				if (Array.isArray(jsondata)) {
+				jsondata.forEach(item => {
+					const newRow = document.createElement('tr');
+					 
+					const idCell = document.createElement('td');
+					
+
+					checkboxCell.appendChild(checkbox);
+					newRow.appendChild(checkboxCell);
+					
+					const ReceivingDateCell = document.createElement('td');
+					const ItemCodeCell = document.createElement('td');
+					const DescriptionCell = document.createElement('td');
+					const PO_QTYCell = document.createElement('td');
+					const REC_QTYCell = document.createElement('td');
+					const UOMCell = document.createElement('td');
+					const BarcodeCell = document.createElement('td');
+					const DiscrepancyCell = document.createElement('td');
+					const RemarksCell = document.createElement('td');
+					const editButtonCell = document.createElement('td');
+
+					// ... other cell creation
+
+					idCell.textContent = item.id;
+					newRow.appendChild(idCell);
+
+					// Create the edit button
+					const editButton = document.createElement('button');
+					editButton.type = 'button';
+					editButton.classList.add('btn', 'btn-primary','btn-sm', 'edit-btn');	
+					editButton.textContent = 'Edit';
+					editButton.dataset.id = item.ProductCode;
+
+					// Append the edit button to the editButtonCell
+					editButtonCell.appendChild(editButton);
+						
+
+					// ... populate other cells
+
+					ReceivingDateCell.textContent = item.ReceivingDate;
+					ItemCodeCell.textContent = item.ItemCodeCode;
+					DescriptionCell.textContent = item.Description;
+					PO_QTYCell.textContent = item.PO_QTY;
+					REC_QTYCell.textContent = item.REC_QTY;
+					UOMCell.textContent = item.UOMC;
+					BarcodeCell.textContent = item.Barcode;
+					DiscrepancyCell.textContent = item.Discrepancy;
+					RemarksCell.textContent = item.Remarks;
+					// ... set content for other cells
+
+					newRow.appendChild(ReceivingDateCell);
+					newRow.appendChild(ItemCodeCell);
+					newRow.appendChild(DescriptionCell);
+					newRow.appendChild(PO_QTYCell);
+					newRow.appendChild(REC_QTYCell);
+					newRow.appendChild(UOMCell);
+					newRow.appendChild(BarcodeCell);
+					newRow.appendChild(DiscrepancyCell);
+					newRow.appendChild(RemarksCell);
+					newRow.appendChild(editButtonCell);
+					
+					// ... append other cells
+
+					tableBody.appendChild(newRow);
+				});
+				} else {
+				console.error('jsondata is not an array:', jsondata);
+				}
+
+				$('#modalTable').modal('show');
+			},
+			error: function(error) {
+				console.error('AJAX error:', error);
+			}
+			});
+		});
+	});
 	</script>
 @endsection

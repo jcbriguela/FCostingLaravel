@@ -307,20 +307,29 @@ foreach ($request->input('ItemCode') as $index => $itemCode) {
         $status = $validatedData['status'];
         $id = $validatedData['id'];
         $remarks ="";
+        $ascending ="0";
 
-        // Call your stored procedure
-        $result = DB::statement('CALL SP_UPDATE_TRANSACTIONDETAILS_APPROVED(?, ?, ?, ?)', [
-            $id,
-            $status, 
-            auth()->user()->id,
-            $remarks
-        ]);
+        try {
+           
+                $result = DB::select('CALL SP_UPDATE_TRANSACTIONDETAILS_APPROVED(?, ?, ?, ?)', [
+                    $id,
+                    $status, 
+                    auth()->user()->id,
+                    $remarks
+                ]);
 
-        if ($result) {
-            return response()->json(['message' => 'Status updated successfully']);
-        } else {
-            return response()->json(['message' => 'Error updating status'], 500);
-        }
+                $updatedData = [];
+                if (count($result) > 0) {
+                    // dd($result);
+                    return response()->json([
+                        'message' => $result,
+                    ]);
+                }
+
+            } catch (Exception $e) {
+                // Handle potential database or other errors
+                return response()->json(['message' => 'Error updating status: ' . $e->getMessage()], 500);
+            }
     }
 
 

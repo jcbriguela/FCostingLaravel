@@ -16,10 +16,13 @@
 									<!--begin::Page Heading-->
 									<div class="d-flex align-items-baseline flex-wrap mr-5">
 										<!--begin::Page Title-->
-										<h5 class="text-dark font-weight-bold my-1 mr-5">Receiving Actual Delivery</h5>
+										<h5 class="text-dark font-weight-bold my-1 mr-5">Approval Actual Delivery</h5>
 										<!--end::Page Title-->
 										<!--begin::Breadcrumb-->
 										<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+											<li class="breadcrumb-item text-muted">
+												<a href="" class="text-muted">Receiving</a>
+											</li>
 											<li class="breadcrumb-item text-muted">
 												<a href="" class="text-muted">Inventory</a>
 											</li>
@@ -53,7 +56,7 @@
 																		<div class="card card-custom">
 																			<div class="card-header flex-wrap py-5">
 																				<h3 class="card-title align-items-start flex-column">
-																					<span class="card-label font-weight-bolder text-dark">Receiving Actual Delivery</span>
+																					<span class="card-label font-weight-bolder text-dark">For Approval List</span>
 																					<span class="text-muted mt-3 font-weight-bold font-size-sm">Please see the details of received items</span>
 																				</h3>
 																				<div class="card-toolbar">
@@ -70,12 +73,15 @@
 																				<span></span>
 																			</label>
 																	</th>
+																	<th style="min-width: 100px">#</th>
+																	<th style="min-width: 100px">Receiving Date</th>
 																	<th style="min-width: 100px">Item Code</th>
 																	<th style="min-width: 100px">Description</th>
-																	<th style="min-width: 100px">Unit</th>
 																	<th style="min-width: 100px">SO Qty</th>
 																	<th style="min-width: 100px">Actual Received</th>
+																	<th style="min-width: 100px">UOM</th>
 																	<th style="min-width: 100px">Discrepancy</th>
+																	<th style="min-width: 100px">Status</th>
 																	<th style="min-width: 100px">Remarks</th>
 																	<th class="pr-0 text-right" style="min-width: 100px">action</th>
 																</thead>
@@ -88,12 +94,15 @@
 																<span></span>
 															</label>
 														</td>
+														<td>{{$row->TransactionID }}</td>
+														<td>{{$row->ReceivingDate}}</td>
 														<td>{{$row->ItemCode}}</td>
 														<td>{{$row->InventoryName}}</td>
-														<td>{{$row->Value}}</td>
 														<td>{{$row->PO_QTY}}</td>
 														<td>{{$row->REC_QTY}}</td>
+														<td>{{$row->UOM_Desc}}</td>
 														<td id="difference"></td>
+														<td><span class="form-text text-muted">{{$row->Status}}</span></td>
 														<td><span class="form-text text-muted">{{$row->Remarks}}</span></td>
 														<td class="pr-0 text-right">
                                                             <div class="btn-group">
@@ -112,8 +121,8 @@
                                                                 <div class="dropdown-menu">
                                                                     @csrf
                                                                     <meta name="csrf-token" content="{{ csrf_token() }}">
-                                                                        <li><a class="dropdown-item" href="#" data-status="1" data-value="{{ $row->id }}">Approved</a></li>
-                                                                        <li><a class="dropdown-item" href="#" data-status="2" data-value="{{ $row->id }}">Disapproved</a></li>
+                                                                        <li><a class="dropdown-item" href="#" data-status="1" data-value="{{ $row->TransactionID  }}">Approved</a></li>
+                                                                        <li><a class="dropdown-item" href="#" data-status="2" data-value="{{ $row->TransactionID  }}">Disapproved</a></li>
                                                                     </meta>
                                                                 </div>
 															</div>
@@ -124,77 +133,25 @@
 														<td colspan="17">No data found.</td>
 													</tr>
 													@endforelse
-													<tr>
-                                                    <td class="pl-0">
-															<label class="checkbox checkbox-lg checkbox-inline">
-																<input type="checkbox" value="1" />
-																<span></span>
-															</label>
-														</td>
-                                                        <td>
-																<span>162D9A</span> 
-														</td>
-                                                        <td>
-																<span>Classic Sourdough</span>
-														</td>
-                                                        <td>
-																<span>PC</span>
-														</td>
-                                                       
-                                                        <td>
-																<span>10</span>
-														</td>
-                                                        <td>
-                                                                <span>8</span>
-                                                        </td>
-                                                        <td>
-																<span class="font-weight-bold text-danger">2</span>
-														</td>
-                                                        <td>
-                                                            <span class="form-text text-muted">Unavailable Supply, Send next week</span>
-                                                        </td>
-														<td class="pr-0 text-right">
-                                                            <div class="btn-group">
-																<button type="button" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    <span class="svg-icon svg-icon-md svg-icon-primary">
-                                                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                                    <rect x="0" y="0" width="24" height="24" />
-                                                                                    <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)" />
-                                                                                    <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                                                </g>
-                                                                            </svg>
-                                                                    </span>
-																</button>
-                                                                <div class="dropdown-menu">
-                                                                    @csrf
-                                                                    <meta name="csrf-token" content="{{ csrf_token() }}">
-                                                                        <li><a class="dropdown-item" href="#" data-status="1">Approved</a></li>
-                                                                        <li><a class="dropdown-item" href="#" data-status="2">Disapproved</a></li>
-                                                                    </meta>
-                                                                </div>
-															</div>
-														</td>
-													</tr>
-																</tbody>
-															</table>
-																				<!--end: Datatable-->
-																			</div>
-																		</div>
-																		<!--end: Card!-->
-																	</div>
-																	</div>
-																	<!--end: Row!-->
-																	
-																					<!--end::Content-->
-																				</div>
-																				<!--end::Info-->
-																			</div>
-																			<!--end::Details-->
-																			<div class="separator separator-solid"></div>
-																			</div>
-																			</div>
+													
+													</tbody>
+												</table>
+											<!--end: Datatable-->
+										</div>
+									</div>
+									<!--end: Card!-->
+								</div>
+								</div>
+								<!--end: Row!-->
+								
+												<!--end::Content-->
+											</div>
+											<!--end::Info-->
+										</div>
+										<!--end::Details-->
+										<div class="separator separator-solid"></div>
+										</div>
+										</div>
 								
 								<!--begin::Row Insert the Page Details-->
                                 <div class="d-flex flex-row">
@@ -539,8 +496,8 @@
 			var id = $(this).data('value');
 
 			$.ajax({
-				url: '/update-status', // Replace with your controller route
-				type: 'POST',
+				url: '/update-status-inv', // Replace with your controller route
+				type: 'PUT',
 				data: {
 					status: status,
 					id: id,
@@ -548,7 +505,8 @@
 				},
 				success: function(response) {
 					console.log(response); // Handle the response from the controller
-					alert(response);
+					// alert(response.message);
+					location.reload();
 				},
 				error: function(error) {
 					console.error(error); // Handle errors

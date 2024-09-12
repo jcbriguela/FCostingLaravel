@@ -142,7 +142,7 @@ Route::get('/get_last_id', [ReceivingController::class, 'create'])->name('get_la
 Route::post('/save_datagrid_data', [ReceivingController::class, 'store'])->name('save_datagrid_data');
 Route::get('/rec-show-list/id', 'ReceivingController@show')->name('rec-show-list');
 
-Route::post('/update-status', [ReceivingController::class, 'update'])->name('update-status');
+Route::put('/update-status-inv', [ReceivingController::class, 'update'])->name('update-status');
 
 
 
