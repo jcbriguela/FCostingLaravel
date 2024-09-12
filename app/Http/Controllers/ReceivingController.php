@@ -48,10 +48,15 @@ class ReceivingController extends Controller
         ->select('*') // Select all columns from both tables
         ->get(); 
 
+        $ItemCodelist = DB::table('product')
+        ->select('ItemCode') // Select all columns from both tables
+        ->groupby('ItemCode') // Filter based on provided or request ID
+        ->get(); 
+
 
         $data = DB::select("CALL SP_CHECK_RECEIVING_ONLOAD(?, ?)", [$ascending, $branchId]); 
 
-        return view('Prototype.Inventory.Receiving',compact('data','module','Moduledata'));
+        return view('Prototype.Inventory.Receiving',compact('data','module','Moduledata','ItemCodelist'));
         // return view('Prototype.Inventory.InventoryList');
     }
 
@@ -198,6 +203,7 @@ foreach ($request->input('ItemCode') as $index => $itemCode) {
     $transactionDetailsModel->ItemCode = $itemCode;
     $transactionDetailsModel->PO_QTY = $request->input('PO_QTY')[$index];
     $transactionDetailsModel->REC_QTY = $request->input('REC_QTY')[$index];
+    $transactionDetailsModel->ExpirationDate = $request->input('ExpirationDate')[$index];
     $transactionDetailsModel->RECUserID = auth()->user()->id;
     $transactionDetailsModel->ReceivedById = auth()->user()->id;
     $transactionDetailsModel->save();
@@ -401,5 +407,22 @@ foreach ($request->input('ItemCode') as $index => $itemCode) {
     {
         $items = Item::all(); // Replace with your model and query
         return response()->json($items);
+    }
+    public function fetchItem(Request $request)
+    {
+        $itemCode = $request->input('selectedItemCode');
+        // Perform your search logic using the $module value
+        // ...
+        $data = DB::table('product')
+        ->select('*') // Select all columns from both tables
+        ->where('ItemCode',$itemCode) 
+        ->get(); 
+        if ($data->isEmpty()) {
+            // Item not found, handle it appropriately (e.g., return an empty JSON or an error message)
+            return response()->json(['message' => 'Item not found']);
+        } else {
+            // Return the search results
+            return response()->json($data);
+        }
     }
 }

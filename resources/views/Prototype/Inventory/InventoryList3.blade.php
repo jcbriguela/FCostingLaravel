@@ -341,14 +341,48 @@
 											<table class="table table-head-custom table-vertical-center" id="detailsTable">
 												<thead>
 													<tr class="text-left">
+                                                    <th class="pl-0" style="width: 20px">
+															<label class="checkbox checkbox-lg checkbox-inline">
+																<input type="checkbox" value="1" />
+																<span></span>
+															</label>
+														</th>
 														<th style="min-width: 150px">Item Code</th>
-														<th style="min-width: 150px">Qty</th>
-														<th style="min-width: 150px">Received Date</th>
-														<th style="min-width: 150px">Expiry Date</th>
+														<th style="min-width: 150px">Description</th>
+														<th style="min-width: 150px">Unit</th>
+														<th style="min-width: 150px">Cost</th>
+													    <th style="min-width: 150px">Price</th>
+													    <th style="min-width: 150px">SRP1</th>
+													    <th style="min-width: 150px">SRP2</th>
+													    <th style="min-width: 150px">SRP3</th>
+													    <th style="min-width: 150px">SRP4</th>
+													    <th style="min-width: 150px">SRP5</th>
+													    <th style="min-width: 150px">SRP6</th>
+													    <th style="min-width: 150px">SRP7</th>
+													    <th style="min-width: 150px">Remarks</th>
 													</tr>
 												</thead>
 												<tbody>
-														
+														@forelse ($productList as $productLists)
+														<tr>
+														<td>{{$productLists->ItemCode }}</td>
+														<td>{{$productLists->Description }}</td>
+														<td>{{$productLists->UOM }}</td>
+														<td>{{$productLists->Cost }}</td>
+														<td>{{$productLists->Price }}</td>
+														<td>{{$productLists->SRP_1 }}</td>
+														<td>{{$productLists->SRP_2 }}</td>
+														<td>{{$productLists->SRP_3 }}</td>
+														<td>{{$productLists->SRP_4 }}</td>
+														<td>{{$productLists->SRP_5 }}</td>
+														<td>{{$productLists->SRP_6 }}</td>
+														<td>{{$productLists->SRP_7 }}</td>
+														</tr>
+														@empty
+														<tr>
+															<td colspan="17">No data found.</td>
+														</tr>
+														@endforelse
 												</tbody>
 											</table>
 										</div>
@@ -560,7 +594,6 @@ $(document).ready(function() {
                 console.log(response);
 				var data = response.data;
 				var dataInv = response.dataInv;
-				var dataP = response.dataP;
 				console.log(data);
 
 				var itemDescriptions = "";
@@ -629,6 +662,25 @@ $(document).ready(function() {
 				});
         		$('#SRP_7').val(SRP_7s);
 
+                $('#detailsTable tbody').empty();
+				// Populate the table with the response data
+				$.each(data, function(index, item) {
+					var row = $('<tr></tr>');
+					row.append('<td>' + item.ItemCode + '</td>');
+					row.append('<td>' + item.Description + '</td>');
+					row.append('<td>' + item.UOM + '</td>');
+					row.append('<td>' + item.Cost + '</td>');
+					row.append('<td>' + item.Price + '</td>');
+					row.append('<td>' + item.SRP_1 + '</td>');
+					row.append('<td>' + item.SRP_2 + '</td>');
+					row.append('<td>' + item.SRP_3 + '</td>');
+					row.append('<td>' + item.SRP_4 + '</td>');
+					row.append('<td>' + item.SRP_5 + '</td>');
+					row.append('<td>' + item.SRP_6 + '</td>');
+					row.append('<td>' + item.SRP_7 + '</td>');
+					$('#detailsTable tbody').append(row);
+				});
+
 				
 					// Populate another table or element with dataInv
 					$('#InventoryTable tbody').empty();
@@ -641,15 +693,23 @@ $(document).ready(function() {
 
 					});
 
-					$('#detailsTable tbody').empty();
-					// Populate the table with the response data
-					$.each(dataP, function(index, item) {
+                    $('#detailsTableP tbody').empty();
+				// Populate the table with the response data
+				$.each(data, function(index, item) {
 					var row = $('<tr></tr>');
 					row.append('<td>' + item.ItemCode + '</td>');
-					row.append('<td>' + item.REC_QTY + '</td>');
-					row.append('<td>' + item.created_at + '</td>');
-					row.append('<td>' + item.ExpirationDate + '</td>');
-					$('#detailsTable tbody').append(row);
+					row.append('<td>' + item.Description + '</td>');
+					row.append('<td>' + item.UOM + '</td>');
+					row.append('<td>' + item.Cost + '</td>');
+					row.append('<td>' + item.Price + '</td>');
+					row.append('<td>' + item.SRP_1 + '</td>');
+					row.append('<td>' + item.SRP_2 + '</td>');
+					row.append('<td>' + item.SRP_3 + '</td>');
+					row.append('<td>' + item.SRP_4 + '</td>');
+					row.append('<td>' + item.SRP_5 + '</td>');
+					row.append('<td>' + item.SRP_6 + '</td>');
+					row.append('<td>' + item.SRP_7 + '</td>');
+					$('#detailsTableP tbody').append(row);
 				});
             },
             error: function(error) {

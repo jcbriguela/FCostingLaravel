@@ -9,6 +9,8 @@ use App\Models\TransactionHeaderModel;
 use App\Models\Branch;
 use App\Models\User;
 use App\Models\ProductModel;
+use App\Models\TransactionDetailsModel;
+
 
 
 
@@ -73,7 +75,7 @@ class InventoryController extends Controller
         $data = DB::select("CALL SP_GET_RECEIVINGITEMS_HEADERID(?,?)", [$id,$ascending]); 
         
         $all = "0"; 
-        $ItemCode = "162D9A"; 
+        $ItemCode = ""; 
        
         $dataInv = DB::select("CALL SP_GET_ITEMINVENTORY_BRANCH(?,?,?)", [$branchId,$all,$ItemCode]); 
 
@@ -97,6 +99,40 @@ class InventoryController extends Controller
 
         // dd($data);
         return view('Prototype.Inventory.InventoryList',compact('data','dataInv','ItemCodelist','productList'));
+
+    }
+    public function view($id)
+    {
+        $ascending = "1"; // Default to ascending order
+        $branchId = auth()->user()->branchid; // Default to ascending order
+        // Call the stored procedure
+        $data = DB::select("CALL SP_GET_RECEIVINGITEMS_HEADERID(?,?)", [$id,$ascending]); 
+        
+        $all = "0"; 
+        $ItemCode = ""; 
+       
+        $dataInv = DB::select("CALL SP_GET_ITEMINVENTORY_BRANCH(?,?,?)", [$branchId,$all,$ItemCode]); 
+
+        $ItemCodelist = DB::table('product')
+        ->select('ItemCode') // Select all columns from both tables
+        ->groupby('ItemCode') // Filter based on provided or request ID
+        ->get(); 
+
+        $productList = DB::table('product')
+        ->select('*') // Select all columns from both tables
+        ->get(); 
+
+        
+
+        // $data = DB::table('transactiondetails as a')
+        // ->leftJoin('productmasterfile as b', 'a.ItemCode', '=', 'b.InventoryId')
+        // ->leftJoin('settings as c', 'b.UOM', '=', 'c.id')
+        // ->select('a.*', 'b.*','c.*') // Select all columns from both tables
+        // ->where('a.TransactionHeaderId', $id) // Filter based on provided or request ID
+        // ->get(); 
+
+        // dd($data);
+        return view('Prototype.Inventory.ReceivingView',compact('data','dataInv','ItemCodelist','productList'));
 
     }
 
@@ -166,6 +202,16 @@ class InventoryController extends Controller
          ->where('ItemCode',$selectedSearch) // Select all columns from both tables
          ->get(); 
 
+      
+
+
+         $dataP = DB::table('transactiondetails')
+         ->select('*') // Select all columns from both tables
+         ->where('ItemCode',$selectedSearch) // Select all columns from both tables
+         ->get(); 
+
+
+
          $all = "0"; 
          $branchId = auth()->user()->branchid; // Default to ascending order
         
@@ -173,7 +219,8 @@ class InventoryController extends Controller
 
          $combinedResponse = [
             'data' => $data,
-            'dataInv' => $dataInv
+            'dataInv' => $dataInv,
+            'dataP' => $dataP
         ];
     
         return response()->json($combinedResponse);

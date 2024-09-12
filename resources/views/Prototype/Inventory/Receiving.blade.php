@@ -66,54 +66,7 @@
 											<!--begin::Container-->
 											<div class="container">
 																	<!--begin::Card-->
-																	<div class="card card-custom gutter-b">
-																		<div class="card-body">
-																			<!--begin::Details-->
-																			<div class="d-flex mb-9">
-																				<!--begin::Info-->
-																				<div class="flex-grow-1">
-																					<!--begin::Title-->
-																					<!-- <div class="d-flex justify-content-between flex-wrap mt-1">
-																						<div class="d-flex mr-3">
-																							<a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">Muntinlupa Branch</a>
-																							
-																						</div>
-																					</div> -->
-																					<!--end::Title-->
-																					<!--begin::Content-->
-																					<!-- <div class="row">
-																					<div class="col-lg-2">
-
-																							<div class="d-flex flex-wrap justify-content-between mt-1">
-																								<div class="d-flex flex-column flex-grow-1 pr-8 ">
-																								<span class="font-weight-bold text-dark-50"> Supplier : </span>
-																								<span class="font-weight-bold text-dark-50"> Address : </span>
-																								<span class="font-weight-bold text-dark-50"> TIN : </span>
-																								<span class="font-weight-bold text-dark-50"> DR: No : </span>
-																								<span class="font-weight-bold text-dark-50"> Date: </span>
-																								<span class="font-weight-bold text-dark-50"> PO Ref No: </span>
-																							</div>
-																						</div>
-																						</div>
-																						<div class="col-lg-10">
-																							<div class="d-flex flex-column flex-grow-1 pr-8 ">
-																							<span class="font-weight-bold text-dark-75">XXYZ Company</span>
-																							<span class="font-weight-bold text-dark-75">Taguig City</span>
-																							<span class="font-weight-bold text-dark-75">1111-1111-111</span>
-																							<span class="font-weight-bold text-dark-75">9999999</span>
-																							<span class="font-weight-bold text-dark-75">Aug 18, 2024</span>
-																							<span class="font-weight-bold text-danger">123456789</span>
-																							</div>
-																						</div>
-																					</div> -->
-																					<!--end::Content-->
-																				</div>
-																				<!--end::Info-->
-																			</div>
-																			<!--end::Details-->
-																			<div class="separator separator-solid"></div>
-																		</div>
-																	</div>
+																	
 																	<!--end::Card-->
 																	<!--begin::Row-->
 																	<div class="row">
@@ -138,7 +91,7 @@
 																				<div class="modal-content">
 																					<div class="modal-header">
 																						<h5 class="modal-title" id="inputDatagridModalLabel">Add New Item
-																						<button type="button" class="btn btn-primary" name="addNewRow	" id="addNewRow">+</button>
+																						<!-- <button type="button" class="btn btn-primary" name="addNewRow	" id="addNewRow">+</button> -->
 																					</h5> 
 																						
 																							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -157,7 +110,7 @@
 																										<th style="min-width: 150px">Item Code</th>
 																										<th style="min-width: 150px">Description</th>
 																										<th style="min-width: 150px">SO Quantity</th>
-																										<th style="min-width: 150px">Record Quantity</th>
+																										<th style="min-width: 150px">Actual Quantity</th>
 																										<th style="min-width: 150px">UOM</th>
 																										<th style="min-width: 150px">Barcode</th>
 																										<th style="min-width: 150px">Discrepancy</th>
@@ -184,7 +137,7 @@
 																				<!--begin: Datatable-->
 																				<table class="table">
 																<thead>
-																	<tr>
+																	<tr>	
 																		<th scope="col">#</th>
 																		<th scope="col">Transaction Type</th>
 																		<th scope="col">Order Date</th>
@@ -216,10 +169,19 @@
 																		<td>{{ $row->CreatedDate }}</td>
 																		<td>
 																			<!-- <button id ="btnAdd" data-value="{{ $row->Id }}"   class="btn btn-primary btn-sm  btn-icon" > -->
-																		<button id ="btnAdd" data-value="{{ $row->Id }}" data-value2="{{ $row->Total_Item }}" data-toggle="modal" data-target="#inputDatagridModal"  class="btn btn-primary btn-sm  btn-icon" >
+																		<button id ="btnAdd" data-value="{{ $row->Id }}" data-value2="{{ $row->Total_Item }}"  class="btn btn-primary btn-sm  btn-icon" >
 																			+
 																			</button>
-																			<a href="/inventory-list/{{ $row->Id }}" onclick="return confirm('Are you sure you want to proceed for approval?');" class="btn btn-sm btn-clean btn-icon" title ="">
+																			<a href="/inventory-view/{{ $row->Id }}"  class="btn btn-sm btn-clean btn-icon" title ="">
+																			<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo13\dist/../src/media/svg/icons\Text\Align-justify.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+																				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																					<rect x="0" y="0" width="24" height="24"/>
+																					<path d="M5,5 L19,5 C19.5522847,5 20,5.44771525 20,6 C20,6.55228475 19.5522847,7 19,7 L5,7 C4.44771525,7 4,6.55228475 4,6 C4,5.44771525 4.44771525,5 5,5 Z M5,13 L19,13 C19.5522847,13 20,13.4477153 20,14 C20,14.5522847 19.5522847,15 19,15 L5,15 C4.44771525,15 4,14.5522847 4,14 C4,13.4477153 4.44771525,13 5,13 Z" fill="#000000" opacity="0.3"/>
+																					<path d="M5,9 L19,9 C19.5522847,9 20,9.44771525 20,10 C20,10.5522847 19.5522847,11 19,11 L5,11 C4.44771525,11 4,10.5522847 4,10 C4,9.44771525 4.44771525,9 5,9 Z M5,17 L19,17 C19.5522847,17 20,17.4477153 20,18 C20,18.5522847 19.5522847,19 19,19 L5,19 C4.44771525,19 4,18.5522847 4,18 C4,17.4477153 4.44771525,17 5,17 Z" fill="#000000"/>
+																				</g>
+																			</svg><!--end::Svg Icon--></span>
+																			</a>
+																			<a href="/inventory-list/{{ $row->Id }}"  class="btn btn-sm btn-clean btn-icon" title ="">
 																			<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo13\dist/../src/media/svg/icons\Files\Folder-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 																						<rect x="0" y="0" width="24" height="24"/>
@@ -228,6 +190,7 @@
 																					</g>
 																				</svg><!--end::Svg Icon--></span>
 																			</a>
+																			
 																			
 																																							</button>
 																		<!-- <button id ="myButton" class="btn btn-primary" data-id="{{ $row->Id }}">+</button> -->
@@ -284,7 +247,15 @@
 					// newRow.append('<td>' + dataValue + '</td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="TransactionHeaderID[]" value="' + dataValue + '" ></td>');
 					newRow.append('<td><input class="form-control col-10" type="date" name="ReceivingDate[]"></td>');
-					newRow.append('<td><input class="form-control col-10" type="text" name="ItemCode[]"></td>');
+					var dropdownOptions = '';
+					@foreach($ItemCodelist as $ItemCodelists)
+						dropdownOptions += '<option value="{{ $ItemCodelists->ItemCode }}">{{ $ItemCodelists->ItemCode }}</option>';
+					@endforeach
+					var itemCodeSelect = $('<select class="form-control col-10" name="ItemCode[]">' + dropdownOptions + '</select>');
+
+        			// newRow.append('<td></td>'); // Empty cell for ItemCode (populated later)
+
+					 newRow.append('<td><select class="form-control col-10" name="ItemCode[]">' + dropdownOptions + '</select></td>');
 					newRow.append('<td><input class="form-control col-10" type="text" name="Description[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="PO_QTY[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="number" name="REC_QTY[]"></td>');
@@ -293,11 +264,49 @@
 					newRow.append('<td><input class="form-control col-10" type="number" name="Discrepancy[]"></td>');
 					newRow.append('<td><input class="form-control col-10" type="date" name="ExpirationDate[]"></td>');
 					newRow.append('<td><textarea class="form-control form-control-solid" rows="3" name="Remarks[]"></textarea></td>');
-				// Add more cells as needed
-				$('tbody').append(newRow);
-				}
+					$('tbody').append(newRow);
+					$('tbody').find('select[name="ItemCode[]"]').change(function() {
+						var selectedItemCode = $(this).val();
+
+						fetchItemDetails(selectedItemCode, function(item) {
+								var row = $(this).closest('tr'); // Get the current row
+								// var row = $(this).parent().closest('tr');
+								row.find('input[name="Description[]"]').val(item.Description);
+								row.find('input[name="UOM[]"]').val(item.UOM);
+							
+						});
+					});
+					}
+					$('#inputDatagridModal').modal('show');
+
 			});
 		
+			function fetchItemDetails(selectedItemCode, callback) {
+			$.ajax({
+				url: "{{ route('fetch_item_details') }}", // Replace with your actual route
+				type: 'GET',
+				data: {
+					selectedItemCode: selectedItemCode
+				},
+				success: function(response) {
+					console.log('Received response:', response);
+					if (response && Array.isArray(response)) {
+						for (var i = 0; i < response.length; i++) {
+						var item = response[i];
+						console.log('Item Code:', item.ItemCode);
+						console.log('Description:', item.Description);
+						console.log('UOM:', item.UOM);
+						callback(item); // Pass the item object to the callback
+						}
+					} else {
+						console.error('Error: Invalid response data format');
+					}
+				},
+				error: function(error) {
+					console.error('Error fetching item details:', error);
+				}
+			});
+			}
 
 		// Save the datagrid data when the "Save Data" button is clicked
 		// $('#saveDatagridData').on('click', function() {
@@ -340,6 +349,7 @@
 			success: function(response) {
 				console.log(response); // Handle the success response
 				$('#inputDatagridModal').modal('hide');
+				window.location.reload();
 			},
 			error: function(error) {
 				console.log(error); // Handle the error response

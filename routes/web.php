@@ -108,6 +108,8 @@ Route::get('InventoryList2', function () {
 
 // Route::POST('/inventory-list/create', [InventoryController::class, 'create']);
 Route::GET('/inventory-list/{id}', [InventoryController::class, 'create']);
+Route::GET('/inventory-view/{id}', [InventoryController::class, 'view']);
+
 Route::get('/InventoryList2/{value_id}', 'InventoryController@yourMethod');
 Route::get('/ApprovalList',[InventoryController::class,'index']);
 
@@ -145,6 +147,9 @@ Route::post('/save_datagrid_data', [ReceivingController::class, 'store'])->name(
 Route::get('/rec-show-list/id', 'ReceivingController@show')->name('rec-show-list');
 
 Route::put('/update-status-inv', [ReceivingController::class, 'update'])->name('update-status');
+Route::GET('fetch_item_details', [ReceivingController::class, 'fetchItem'])->name('fetch_item_details');
+
+
 
 
 
