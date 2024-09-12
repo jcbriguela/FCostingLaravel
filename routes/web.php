@@ -12,6 +12,8 @@ use App\Http\Controllers\RolesAndPermissionController;
 use App\Http\Controllers\ReceivingController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ReferencesController;
+use App\Http\Controllers\SalesInvController;
+
 
 
 /*
@@ -154,6 +156,7 @@ Route::GET('select-module', [ReferencesController::class, 'show'])->name('select
 //Inventory
 Route::GET('search', [InventoryController::class, 'search'])->name('search');
 
-
+//Sales Inventory
+Route::GET('SalesInv', [SalesInvController::class, 'index']);
 
 require __DIR__.'/auth.php';

@@ -184,6 +184,7 @@
 										<span class="menu-text">Inventory</span>
 										<i class="menu-arrow"></i>	
 									</a>
+									@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
 									<div class="menu-submenu">
 										<i class="menu-arrow"></i>
 										<ul class="menu-subnav">
@@ -197,7 +198,8 @@
 											</li>
 										</ul>
 									</div>
-								@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
+									@endif
+									@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
 
 									<div class="menu-submenu">
 										<i class="menu-arrow"></i>
@@ -211,6 +213,7 @@
 									</div>
 								@endif
 								</li>
+								
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-console"></i>
