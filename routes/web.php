@@ -151,6 +151,9 @@ Route::GET('References', [ReferencesController::class, 'index']);
 Route::POST('store-reference',[ReferencesController::class,'store']);
 Route::GET('select-module', [ReferencesController::class, 'show'])->name('select-module');
 
+//Inventory
+Route::GET('search', [InventoryController::class, 'search'])->name('search');
+
 
 
 require __DIR__.'/auth.php';

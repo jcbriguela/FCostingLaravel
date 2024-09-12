@@ -162,9 +162,38 @@
 											<div class="card-body pt-15">
 												<!--begin::User-->
 														<div class="form-group row">
-															<label class="col-4 col-form-label">Transaction Type</label>
+															<label class="col-4 col-form-label">Search</label>
 															<div class="col-8">
-																<input class="form-control" type="text" value="REC" id="example-text-input" name="TransactionType" />
+																		<select class="form-control select2" id="kt_select2_2" name="SearchitemCode">
+                                                                            <!-- <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                                                <option value="AK">Alaska</option>
+                                                                                <option value="HI">Hawaii</option>
+                                                                            </optgroup>
+                                                                            <optgroup label="Pacific Time Zone">
+                                                                                <option value="CA">California</option>
+                                                                                <option value="NV" selected="selected">Nevada</option>
+                                                                                <option value="OR">Oregon</option>
+                                                                                <option value="WA">Washington</option>
+                                                                            </optgroup> -->
+                                                                            @forelse ($productList as $productLists)
+                                                                            <optgroup label="">
+                                                                             <option value="{{ $productLists->ItemCode }}">{{ $productLists->ItemCode }}</option>
+                                                                             @empty
+                                                                             <option value="">No data found.</option>
+                                                                            </optgroup>
+                                                                            @endforelse
+
+                                                                            
+                                                                        </select>
+															</div>
+															<div class="col-4">
+															</div>
+															<div class="col-8">
+																 <!--begin::Button-->
+																 <button id ="btnSearch" class="btn btn-primary  font-weight-bolder" data-value="">
+																	<i class="fab fa-sistrix"> Search Record</i>
+																</button>
+																<!--end::Button-->
 															</div>
 														</div>
 														<!-- <div class="form-group row">
@@ -232,7 +261,7 @@
 														<div class="card-body py-0">
 										<!--begin::Table-->
 										<div class="table-responsive">
-											<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+											<table class="table table-head-custom table-vertical-center" id="detailsTable">
 												<thead>
 													<tr class="text-left">
                                                     <th class="pl-0" style="width: 20px">
@@ -257,105 +286,26 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-                                                    <td class="pl-0">
-															<label class="checkbox checkbox-lg checkbox-inline">
-																<input type="checkbox" value="1" />
-																<span></span>
-															</label>
-														</td>
-                                                        <td>
-																<span>107D9A</span>
-														</td>
-                                                        <td>
-																<span>Apple Pie</span>
-														</td>
-                                                        <td>
-																<span>Whole</span>
-														</td>
-                                                       
-                                                        <td>
-																<span>200.00</span>
-														</td>
-                                                        <td>
-                                                        		<span>250.00</span>
-
-                                                        </td>
-                                                        <td>
-																<span>270.00</span>
-														</td>
-														<td>
-																<span>290.00</span>
-														</td>
-														<td>
-																<span>310.00</span>
-														</td>
-														<td>
-																<span>330.00</span>
-														</td>
-														<td>
-																<span>350.00</span>
-														</td>
-														<td>
-																<span>370.00</span>
-														</td>
-														<td>
-																<span>390.00</span>
-														</td>
-													</tr>
-													<tr>
-                                                    <td class="pl-0">
-															<label class="checkbox checkbox-lg checkbox-inline">
-																<input type="checkbox" value="1" />
-																<span></span>
-															</label>
-														</td>
-                                                        <td>
-																<span>162D9A</span> 
-														</td>
-                                                        <td>
-																<span>Classic Sourdough</span>
-														</td>
-                                                        <td>
-																<span>PC</span>
-														</td>
-                                                       
-														<td>
-                                                        		<span>100.00</span>
-
-                                                        </td>
-														<td>
-                                                        		<span>130.00</span>
-
-                                                        </td>
-                                                        <td>
-																<span>160.00</span>
-														</td>
-														<td>
-																<span>190.00</span>
-														</td>
-														<td>
-																<span>210.00</span>
-														</td>
-														<td>
-																<span>330.00</span>
-														</td>
-														<td>
-																<span>350.00</span>
-														</td>
-														<td>
-																<span>370.00</span>
-														</td>
-														<td>
-																<span>390.00</span>
-														</td>
-                                                        <td>
-                                                            <span class="form-text text-muted">Unavailable Supply, Send next week</span>
-                                                        </td>
-														
-													</tr>
-													
-													
+														@forelse ($productList as $productLists)
+														<tr>
+														<td>{{$productLists->ItemCode }}</td>
+														<td>{{$productLists->Description }}</td>
+														<td>{{$productLists->UOM }}</td>
+														<td>{{$productLists->Cost }}</td>
+														<td>{{$productLists->Price }}</td>
+														<td>{{$productLists->SRP_1 }}</td>
+														<td>{{$productLists->SRP_2 }}</td>
+														<td>{{$productLists->SRP_3 }}</td>
+														<td>{{$productLists->SRP_4 }}</td>
+														<td>{{$productLists->SRP_5 }}</td>
+														<td>{{$productLists->SRP_6 }}</td>
+														<td>{{$productLists->SRP_7 }}</td>
+														</tr>
+														@empty
+														<tr>
+															<td colspan="17">No data found.</td>
+														</tr>
+														@endforelse
 												</tbody>
 											</table>
 										</div>
@@ -417,34 +367,29 @@
                                                                         <div class="card-body py-0">
                                                         <!--begin::Table-->
                                                         <div class="table-responsive">
-                                                            <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+                                                            <table class="table table-head-custom table-vertical-center" id="InventoryTable">
                                                                 <thead>
                                                                     <tr class="text-left">
                                                                        
-                                                                        <th style="min-width: 150px">Category</th>
-                                                                        <th style="min-width: 150px">Classification</th>
-                                                                        <th style="min-width: 150px">Unit</th>
-                                                                        <th style="min-width: 150px">Quantity</th>
+                                                                        <th style="min-width: 150px">Product Code</th>
+                                                                        <th style="min-width: 150px">Stock On Hand</th>
+                                                                        <!-- <th style="min-width: 150px">Transaction Type</th> -->
+                                                                        <!-- <th style="min-width: 150px">On Hand QTY</th>
+                                                                        <th style="min-width: 150px">Available QTY</th> -->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                                <span>PR</span>
-                                                                        </td>
-                                                                        <td>
-                                                                                <span>Cakes</span>
-                                                                        </td>
-                                                                        <td>
-                                                                                <span>Whole</span>
-                                                                        </td>
-                                                                        <td>
-                                                                                <span>20</span>
-                                                                        </td>
+																<tbody>
+																	@forelse ($dataInv as $rowInv)
+																	<tr>
+																	<td>{{$rowInv->ProductCode }}</td>
+																	<td>{{$rowInv->SOH }}</td>
                                                                     </tr>
-                                                                    
-                                                                    
-                                                                    
+                                                                    @empty
+																	<tr>
+																		<td colspan="17">No data found.</td>
+																	</tr>
+																	@endforelse
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -515,6 +460,94 @@
 		});
 	});
 
+	$(document).ready(function() {
+    $('#searchInput').keyup(function() {
+        var searchQuery = $(this).val();
+
+        $.ajax({
+            url: "{{ route('search') }}",
+            type: 'GET',
+            data: {
+                query: searchQuery
+            },
+            success: function(response) {
+                $('#searchResults').html(response);
+				$('#detailsTable tbody').empty();
+				// Populate the table with the response data
+				$.each(response, function(index, item) {
+					var row = $('<tr></tr>');
+					row.append('<td>' + item.ItemCode + '</td>');
+					row.append('<td>' + item.Description + '</td>');
+					row.append('<td>' + item.UOM + '</td>');
+					row.append('<td>' + item.Cost + '</td>');
+					row.append('<td>' + item.Price + '</td>');
+					row.append('<td>' + item.SRP_1 + '</td>');
+					row.append('<td>' + item.SRP_2 + '</td>');
+					row.append('<td>' + item.SRP_3 + '</td>');
+					row.append('<td>' + item.SRP_4 + '</td>');
+					row.append('<td>' + item.SRP_5 + '</td>');
+					row.append('<td>' + item.SRP_6 + '</td>');
+					row.append('<td>' + item.SRP_7 + '</td>');
+					$('#detailsTable tbody').append(row);
+				});
+            }
+        });
+    });
+});
+
+
+$(document).ready(function() {
+    $('#btnSearch').click(function() {
+        var selectedSearch = $('#kt_select2_2').val();
+        // Send the selectedModule to the controller using AJAX
+        $.ajax({
+            url: "{{ route('search') }}", // Replace with your controller route
+            type: 'GET',
+            data: {
+                selectedSearch: selectedSearch,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                // Handle the response from the controller
+                console.log(response);
+				var data = response.data;
+				var dataInv = response.dataInv;
+                $('#detailsTable tbody').empty();
+				// Populate the table with the response data
+				$.each(data, function(index, item) {
+					var row = $('<tr></tr>');
+					row.append('<td>' + item.ItemCode + '</td>');
+					row.append('<td>' + item.Description + '</td>');
+					row.append('<td>' + item.UOM + '</td>');
+					row.append('<td>' + item.Cost + '</td>');
+					row.append('<td>' + item.Price + '</td>');
+					row.append('<td>' + item.SRP_1 + '</td>');
+					row.append('<td>' + item.SRP_2 + '</td>');
+					row.append('<td>' + item.SRP_3 + '</td>');
+					row.append('<td>' + item.SRP_4 + '</td>');
+					row.append('<td>' + item.SRP_5 + '</td>');
+					row.append('<td>' + item.SRP_6 + '</td>');
+					row.append('<td>' + item.SRP_7 + '</td>');
+					$('#detailsTable tbody').append(row);
+				});
+
+				
+					// Populate another table or element with dataInv
+					$('#InventoryTable tbody').empty();
+					$.each(dataInv, function(index, item) {
+						var row = $('<tr></tr>');
+						row.append('<td>' + item.ProductCode + '</td>');
+						row.append('<td>' + item.SOH + '</td>');
+					$('#InventoryTable tbody').append(row);
+
+					});
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    });
+});
 </script>
 
 @endsection

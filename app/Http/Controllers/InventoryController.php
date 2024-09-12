@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\TransactionHeaderModel;
 use App\Models\Branch;
 use App\Models\User;
+use App\Models\ProductModel;
+
 
 
 class InventoryController extends Controller
@@ -69,6 +71,22 @@ class InventoryController extends Controller
         $branchId = auth()->user()->branchid; // Default to ascending order
         // Call the stored procedure
         $data = DB::select("CALL SP_GET_RECEIVINGITEMS_HEADERID(?,?)", [$id,$ascending]); 
+        
+        $all = "0"; 
+        $ItemCode = "162D9A"; 
+       
+        $dataInv = DB::select("CALL SP_GET_ITEMINVENTORY_BRANCH(?,?,?)", [$branchId,$all,$ItemCode]); 
+
+        $ItemCodelist = DB::table('product')
+        ->select('ItemCode') // Select all columns from both tables
+        ->groupby('ItemCode') // Filter based on provided or request ID
+        ->get(); 
+
+        $productList = DB::table('product')
+        ->select('*') // Select all columns from both tables
+        ->get(); 
+
+        
 
         // $data = DB::table('transactiondetails as a')
         // ->leftJoin('productmasterfile as b', 'a.ItemCode', '=', 'b.InventoryId')
@@ -78,7 +96,7 @@ class InventoryController extends Controller
         // ->get(); 
 
         // dd($data);
-        return view('Prototype.Inventory.InventoryList',compact('data'));
+        return view('Prototype.Inventory.InventoryList',compact('data','dataInv','ItemCodelist','productList'));
 
     }
 
@@ -136,5 +154,30 @@ class InventoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        //  $SearchitemCode = $request->input('SearchitemCode');
+         $selectedSearch = $request->input('selectedSearch');
+
+         $data = DB::table('product')
+         ->select('*') // Select all columns from both tables
+         ->where('ItemCode',$selectedSearch) // Select all columns from both tables
+         ->get(); 
+
+         $all = "0"; 
+         $branchId = auth()->user()->branchid; // Default to ascending order
+        
+         $dataInv = DB::select("CALL SP_GET_ITEMINVENTORY_BRANCH(?,?,?)", [$branchId,$all,$selectedSearch]); 
+
+         $combinedResponse = [
+            'data' => $data,
+            'dataInv' => $dataInv
+        ];
+    
+        return response()->json($combinedResponse);
+
+        
     }
 }
