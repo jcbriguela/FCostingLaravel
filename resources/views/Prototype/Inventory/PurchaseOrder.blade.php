@@ -114,7 +114,7 @@
 															<th>Order Date</th>
 															<th>Total Items</th>
 															<th>Status Count</th>
-															<th>Receiving Status</th>
+															<!-- <th>Receiving Status</th> -->
 															<!-- <th>Received By</th> -->
 															<th>Created Date</th>
 															<!-- <th>Last Updated Date</th>
@@ -132,7 +132,7 @@
 																<td>{{ $row->Total_Item }}</td>
 																 
 																<td>{{ $row->StatusItemCount }}</td>
-																<td>{{ $row->ReceivingStatus }}</td>
+																<!-- <td>{{ $row->ReceivingStatus }}</td> -->
 																<td>{{ $row->CreatedDate }}</td>
 																<!-- <td>{{ $row->ReceivedById }}</td> -->
 													<td nowrap="nowrap"></td>

@@ -65,6 +65,7 @@
 										<div class="d-flex flex-column-fluid">
 											<!--begin::Container-->
 											<div class="container">
+												
 																	<!--begin::Card-->
 																	
 																	<!--end::Card-->
@@ -81,9 +82,79 @@
 																				<div class="card-toolbar">
 																			
 																			<!--begin::Button-->
-																			<!-- <a href="#" data-toggle="modal" data-target="#inputDatagridModal" class="btn btn-primary font-weight-bolder">
-																			<i class="la la-plus"></i>New Record</a> -->
+																			<a href="#" data-toggle="modal" data-target="#RecSO" class="btn btn-primary font-weight-bolder">
+																			<i class="la la-plus"></i>Add Receiving SO</a>
 																			<!--end::Button-->
+
+																			<div class="modal fade" id="RecSO" tabindex="-1" role="dialog" aria-labelledby="inputDatagridModalLabel" aria-hidden="true">
+																				<div class="modal-dialog modal-dialog-centered modal-xl">
+																				<div class="modal-content">
+																					<div class="modal-header">
+																						<h5 class="modal-title" id="RecSO">Add New Item
+																						<!-- <button type="button" class="btn btn-primary" name="addNewRow	" id="addNewRow">+</button> -->
+																					</h5> 
+																						
+																							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																								<i aria-hidden="true" class="ki ki-close"></i>
+																							</button>
+																					</div>
+																					<div class="modal-body">
+																					<form action="/storePO" method = "POST" class="form">
+																	@csrf	
+													<div class="card-body">
+														
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Transaction Type</label>
+															<div class="col-8">
+																<input class="form-control" type="text" value="REC" id="example-text-input" name="TransactionType" />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label for="totItem-input" class="col-4 col-form-label">Total Item</label>
+															<div class="col-8">
+																<input class="form-control" type="number" value="0" id="totItem-input" name ="TotalItem" />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label for="totItem-input" class="col-4 col-form-label">Total Quantity</label>
+															<div class="col-8">
+																<input class="form-control" type="number" value="0" id="totqty-input" name ="TOTALQUANTITY" />
+															</div>
+														</div>
+														<!-- <div class="form-group row">
+															<label for="supId-input" class="col-4 col-form-label">Supplier</label>
+															<div class="col-8">
+																<input class="form-control" type="number" value="0" id="supId-input" name="SupplierID" />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Delivery Receipt</label>
+															<div class="col-8">
+																<input class="form-control" type="text" value="" id="example-text-input" name="DeliveryReceiptNo" />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">PO Receipt </label>
+															<div class="col-8">
+																<input class="form-control" type="text" value="" id="example-text-input" name="POReceiptNo" />
+															</div>
+														</div> -->
+													</div>
+													<div class="card-footer">
+														<div class="row">
+															<div class="col-2"></div>
+															<div class="col-10">
+																<button type="submit" class="btn btn-success mr-2">Submit</button>
+																<button type="reset" class="btn btn-secondary">Cancel</button>
+															</div>
+														</div>
+													</div>
+												</form>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																			
 
 																			<!--begin::Modal-->
 																			<div class="modal fade" id="inputDatagridModal" tabindex="-1" role="dialog" aria-labelledby="inputDatagridModalLabel" aria-hidden="true">
@@ -139,7 +210,7 @@
 																<thead>
 																	<tr>	
 																		<th scope="col">#</th>
-																		<th scope="col">Transaction Type</th>
+																		<!-- <th scope="col">Transaction Type</th> -->
 																		<th scope="col">Order Date</th>
 																		<th scope="col">Receiving Date</th>
 																		<th scope="col">Total Items</th>
@@ -147,8 +218,8 @@
 																		<th scope="col">Actual Record Count</th>
 																		<th scope="col">Quantity Variance</th>
 																		<th scope="col">Status Item Count</th>
-																		<th scope="col">Receiving Status</th>
-																		<th scope="col">Created Date</th>
+																		<!-- <th scope="col">Receiving Status</th> -->
+																		<!-- <th scope="col">Created Date</th> -->
 																		<th scope="col">Actions</th>
 																	</tr>
 																</thead>
@@ -157,7 +228,7 @@
 																	@forelse ($data as $row)
 																	<tr>
 																		<td>{{ $row->Id }}</td>
-																		<td>{{ $row->TransactionType }}</td>
+																		<!-- <td>{{ $row->TransactionType }}</td> -->
 																		<td>{{ $row->OrderDate }}</td>
 																		<td>{{ $row->ReceivingDate }}</td>
 																		<td>{{ $row->Total_Item }}</td>
@@ -165,8 +236,8 @@
 																		<td>{{ $row->Actual_Rec_Count }}</td>
 																		<td>{{ $row->QuatityVariance }}</td>
 																		<td>{{ $row->StatusItemCount }}</td>
-																		<td>{{ $row->ReceivingStatus }}</td>
-																		<td>{{ $row->CreatedDate }}</td>
+																		<!-- <td>{{ $row->ReceivingStatus }}</td> -->
+																		<!-- <td>{{ $row->CreatedDate }}</td> -->
 																		<td>
 																			<!-- <button id ="btnAdd" data-value="{{ $row->Id }}"   class="btn btn-primary btn-sm  btn-icon" > -->
 																		<button id ="btnAdd" data-value="{{ $row->Id }}" data-value2="{{ $row->Total_Item }}"  class="btn btn-primary btn-sm  btn-icon" >

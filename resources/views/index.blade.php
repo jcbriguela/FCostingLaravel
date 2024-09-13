@@ -181,10 +181,10 @@
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-console"></i>
-										<span class="menu-text">Inventory</span>
+										<span class="menu-text">Receiving</span>
 										<i class="menu-arrow"></i>	
 									</a>
-									@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
+									<!-- @if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
 									<div class="menu-submenu">
 										<i class="menu-arrow"></i>
 										<ul class="menu-subnav">
@@ -193,7 +193,20 @@
 													<i class="menu-bullet menu-bullet-dot"></i>
 														<span></span>
 													</i>
-													<span class="menu-text">Sales Order</span>
+													<span class="menu-text">Receiving SO</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+									@endif -->
+									@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
+
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/Receiving" class="menu-link">
+													<span class="menu-text">Receiving SO</span>
 												</a>
 											</li>
 										</ul>
@@ -205,8 +218,8 @@
 										<i class="menu-arrow"></i>
 										<ul class="menu-subnav">
 											<li class="menu-item" aria-haspopup="true">
-												<a href="/Receiving" class="menu-link">
-													<span class="menu-text">Receving</span>
+												<a href="/RecApproval" class="menu-link">
+													<span class="menu-text">Approval</span>
 												</a>
 											</li>
 										</ul>
