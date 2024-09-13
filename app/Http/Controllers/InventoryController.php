@@ -274,4 +274,38 @@ class InventoryController extends Controller
         return view('Prototype.Inventory.InventoryListApproval',compact('data','dataInv','ItemCodelist','productList'));
 
     }
+    public function InventoryL()
+    {
+        $ascending = "1"; // Default to ascending order
+        $branchId = auth()->user()->branchid; // Default to ascending order
+        // Call the stored procedure
+        // $data = DB::select("CALL SP_GET_RECEIVINGITEMS_HEADERID(?,?)", [$id,$ascending]); 
+        
+        $all = "0"; 
+        $ItemCode = ""; 
+       
+        $dataInv = DB::select("CALL SP_GET_ITEMINVENTORY_BRANCH(?,?,?)", [$branchId,$all,$ItemCode]); 
+
+        $ItemCodelist = DB::table('product')
+        ->select('ItemCode') // Select all columns from both tables
+        ->groupby('ItemCode') // Filter based on provided or request ID
+        ->get(); 
+
+        $productList = DB::table('product')
+        ->select('*') // Select all columns from both tables
+        ->get(); 
+
+        
+
+        // $data = DB::table('transactiondetails as a')
+        // ->leftJoin('productmasterfile as b', 'a.ItemCode', '=', 'b.InventoryId')
+        // ->leftJoin('settings as c', 'b.UOM', '=', 'c.id')
+        // ->select('a.*', 'b.*','c.*') // Select all columns from both tables
+        // ->where('a.TransactionHeaderId', $id) // Filter based on provided or request ID
+        // ->get(); 
+
+        // dd($data);
+        return view('Prototype.Inventory.InventoryL',compact('dataInv','ItemCodelist','productList'));
+
+    }
 }

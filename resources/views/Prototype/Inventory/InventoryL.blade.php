@@ -1,0 +1,553 @@
+					
+@extends('index')   
+@section('content') 
+
+
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Subheader-->
+						
+						<!--end::Subheader-->
+						<!--begin::Entry-->
+						<!--begin::Subheader-->
+						<div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+								<!--begin::Info-->
+								<div class="d-flex align-items-center flex-wrap mr-1">
+									<!--begin::Page Heading-->
+									<div class="d-flex align-items-baseline flex-wrap mr-5">
+										<!--begin::Page Title-->
+										<h5 class="text-dark font-weight-bold my-1 mr-5">Approval/Inventory </h5>
+										<!--end::Page Title-->
+										<!--begin::Breadcrumb-->
+										<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+											<li class="breadcrumb-item text-muted">
+												<a href="" class="text-muted">Receiving</a>
+											</li>
+											<li class="breadcrumb-item text-muted">
+												<a href="" class="text-muted">Inventory</a>
+											</li>
+										</ul>
+										<!--end::Breadcrumb-->
+									</div>
+									<!--end::Page Heading-->
+								</div>
+								<!--end::Info-->
+							</div>
+						</div>
+						<!--end::Subheader-->
+						<!--begin::Entry-->
+						<!-- <div class="d-flex flex-column-fluid"> -->
+							<!--begin::Container-->
+							<div class="container">
+																	<div class="card card-custom gutter-b">
+																		
+																		
+								
+								<!--begin::Row Insert the Page Details-->
+                                <div class="d-flex flex-row">
+									<!--begin::Aside-->
+									<div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
+										<!--begin::Card-->
+										<div class="card card-custom">
+											<div class="card-body pt-15">
+												<!--begin::User-->
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Search</label>
+															<div class="col-8">
+																		<select class="form-control select2" id="kt_select2_2" name="SearchitemCode">
+                                                                            <!-- <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                                                <option value="AK">Alaska</option>
+                                                                                <option value="HI">Hawaii</option>
+                                                                            </optgroup>
+                                                                            <optgroup label="Pacific Time Zone">
+                                                                                <option value="CA">California</option>
+                                                                                <option value="NV" selected="selected">Nevada</option>
+                                                                                <option value="OR">Oregon</option>
+                                                                                <option value="WA">Washington</option>
+                                                                            </optgroup> -->
+                                                                            @forelse ($productList as $productLists)
+                                                                            <optgroup label="">
+                                                                             <option value="{{ $productLists->ItemCode }}">{{ $productLists->ItemCode }}</option>
+                                                                             @empty
+                                                                             <option value="">No data found.</option>
+                                                                            </optgroup>
+                                                                            @endforelse
+                                                                        </select>
+															</div>
+															<div class="col-4">
+															</div>
+															<div class="col-8">
+																 <!--begin::Button-->
+																 <button id ="btnSearch" class="btn btn-primary  font-weight-bolder" data-value="">
+																	<i class="fab fa-sistrix"> Search Record</i>
+																</button>
+																<!--end::Button-->
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Description</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="itemDesc" name="itemDesc"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Pack Config</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="PackConfig" name="PackConfig"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Price</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="Price" name="Price"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Product Type</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="ProductType" name="ProductType"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 1</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 1</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 1</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 2</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 3</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 4</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 5</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 6</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">SRP 7</label>
+															<div class="col-8">
+																<input class="form-control text-muted" type="text"  id="SRP_1" name="SRP_1"  />
+															</div>
+														</div>
+														
+														<!-- <div class="form-group row">
+															<label for="supId-input" class="col-4 col-form-label">Supplier</label>
+															<div class="col-8">
+																<input class="form-control" type="number" value="0" id="supId-input" name="SupplierID" />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">Delivery Receipt</label>
+															<div class="col-8">
+																<input class="form-control" type="text" value="" id="example-text-input" name="DeliveryReceiptNo" />
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-4 col-form-label">PO Receipt </label>
+															<div class="col-8">
+																<input class="form-control" type="text" value="" id="example-text-input" name="POReceiptNo" />
+															</div>
+														</div> -->
+												
+											</div>
+											<!--end::Body-->
+										</div>
+										<!--end::Card-->
+									</div>
+									<!--end::Aside-->
+									<!--begin::Content-->
+									<div class="flex-row-fluid ml-lg-8">
+										<!--begin::Row-->
+										<div class="row">
+											<div class="col-lg-12">
+												<!--begin::List Widget 10-->
+												<div class="row">
+									<div class="col-lg-12">
+										<!--begin::Advance Table Widget 2-->
+										<div class="card card-custom card-stretch gutter-b">
+											<!--begin::Header-->
+											<div class="card-header border-0 pt-5">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label font-weight-bolder text-dark">Item Details</span>
+													<span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
+												</h3>
+                                                
+											</div>
+                                            
+                                            
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body pt-2 pb-0 mt-n3">
+												<div class="tab-content mt-5" id="myTabTables11">
+													<!--begin::Tap pane-->
+													<div class="tab-pane fade" id="kt_tab_pane_11_1" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">
+														<!--begin::Table-->
+														<div class="card-body py-0">
+										<!--begin::Table-->
+										
+										<!--end::Table-->
+									</div>
+														<!--end::Table-->
+													</div>
+													
+													<div class="tab-pane fade show active" id="kt_tab_pane_11_3" role="tabpanel" aria-labelledby="kt_tab_pane_11_3">
+														<!--begin::Table-->
+														<div class="card-body py-0">
+										<!--begin::Table-->
+										<div class="table-responsive">
+											<table class="table table-head-custom table-vertical-center" id="detailsTable">
+												<thead>
+													<tr class="text-left">
+														<th style="min-width: 150px">Item Code</th>
+														<th style="min-width: 150px">Qty</th>
+														<th style="min-width: 150px">Received Date</th>
+														<th style="min-width: 150px">Expiry Date</th>
+													</tr>
+												</thead>
+												<tbody>
+														
+												</tbody>
+											</table>
+										</div>
+										<!--end::Table-->
+									</div>
+														<!--end::Table-->
+													</div>
+													<!--end::Tap pane-->
+												</div>
+											</div>
+											<!--end::Body-->
+										</div>
+										<!--end::Advance Table Widget 2-->
+									</div>
+									
+								</div>
+												<!--end: Card-->
+												<!--end: List Widget 10-->
+											</div>
+											
+										</div>
+										<!--end::Row-->
+										<!--begin::Advance Table Widget 5-->
+										<div class="row">
+									    <div class="col-lg-12">
+                                                        <!--begin::Advance Table Widget 2-->
+                                                        <div class="card card-custom card-stretch gutter-b">
+                                                            <!--begin::Header-->
+                                                            <div class="card-header border-0 pt-5">
+                                                                <h3 class="card-title align-items-start flex-column">
+                                                                    <span class="card-label font-weight-bolder text-dark">Inventory List</span>
+                                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm">Actual items in Invetory:</span>
+                                                                </h3>
+                                                               
+                                                            </div>
+                                                            
+                                                            
+                                                            <!--end::Header-->
+                                                            <!--begin::Body-->
+                                                            <div class="card-body pt-2 pb-0 mt-n3">
+                                                                <div class="tab-content mt-5" id="myTabTables11">
+                                                                    <!--begin::Tap pane-->
+                                                                    <div class="tab-pane fade" id="kt_tab_pane_11_1" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">
+                                                                        <!--begin::Table-->
+                                                                        <div class="card-body py-0">
+                                                        <!--begin::Table-->
+                                                        
+                                                        <!--end::Table-->
+                                                    </div>
+                                                                        <!--end::Table-->
+                                                                    </div>
+                                                                    <!--end::Tap pane-->
+                                                                    <!--begin::Tap pane-->
+                                                                    
+                                                                    <!--end::Tap pane-->
+                                                                    <!--begin::Tap pane-->
+                                                                    <div class="tab-pane fade show active" id="kt_tab_pane_11_3" role="tabpanel" aria-labelledby="kt_tab_pane_11_3">
+                                                                        <!--begin::Table-->
+                                                                        <div class="card-body py-0">
+                                                        <!--begin::Table-->
+                                                        <div class="table-responsive">
+                                                            <table class="table table-head-custom table-vertical-center" id="InventoryTable">
+                                                                <thead>
+                                                                    <tr class="text-left">
+                                                                       
+                                                                        <th style="min-width: 150px">Product Code</th>
+                                                                        <th style="min-width: 150px">Description</th>
+                                                                        <th style="min-width: 150px">Stock On Hand</th>
+                                                                        <!-- <th style="min-width: 150px">Transaction Type</th> -->
+                                                                        <!-- <th style="min-width: 150px">On Hand QTY</th>
+                                                                        <th style="min-width: 150px">Available QTY</th> -->
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+																<tbody>
+																	@forelse ($dataInv as $rowInv)
+																	<tr>
+																	<td>{{$rowInv->ProductCode }}</td>
+																	<td>{{$rowInv->Description }}</td>
+																	<td>{{$rowInv->SOH }}</td>
+                                                                    </tr>
+                                                                    @empty
+																	<tr>
+																		<td colspan="17">No data found.</td>
+																	</tr>
+																	@endforelse
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Table-->
+                                                    </div>
+                                                                        <!--end::Table-->
+                                                                    </div>
+                                                                    <!--end::Tap pane-->
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Body-->
+                                                        </div>
+                                                        <!--end::Advance Table Widget 2-->
+                                                    </div>
+                                                    
+                                                </div>
+										<!--end::Advance Table Widget 5-->
+									</div>
+									<!--end::Content-->
+								</div>
+								<!--end::Row-->
+								
+							</div>
+							<!--end::Container-->
+						<!-- </div> -->
+						<!--end::Entry-->
+							
+                                    
+							
+						</div>
+<script>
+
+	var table = document.getElementById("approvalTbl");
+	var rows = table.getElementsByTagName("tr");
+
+	for (var i = 1; i < rows.length; i++) {
+	var cells = rows[i].getElementsByTagName("td");  
+
+	var value1 = parseInt(cells[4].textContent);
+	var value2 = parseInt(cells[5].textContent);
+	var difference = value1 - value2;
+
+	cells[2].textContent = difference;
+	}	
+
+	$(document).ready(function() {
+		$('.dropdown-item').click(function() {
+			var status = $(this).data('status');
+			var id = $(this).data('value');
+
+			$.ajax({
+				url: '/update-status-inv', // Replace with your controller route
+				type: 'PUT',
+				data: {
+					status: status,
+					id: id,
+					_token: '{{ csrf_token() }}' // Add CSRF token if using CSRF protection
+				},
+				success: function(response) {
+					console.log(response); // Handle the response from the controller
+					// alert(response.message);
+					location.reload();
+				},
+				error: function(error) {
+					console.error(error); // Handle errors
+				}
+			});
+		});
+	});
+
+	$(document).ready(function() {
+    $('#searchInput').keyup(function() {
+        var searchQuery = $(this).val();
+
+        $.ajax({
+            url: "{{ route('search') }}",
+            type: 'GET',
+            data: {
+                query: searchQuery
+            },
+            success: function(response) {
+                $('#searchResults').html(response);
+				$('#detailsTable tbody').empty();
+				// Populate the table with the response data
+				$.each(response, function(index, item) {
+					// $('#itemDesc').val($('#itemDesc').val() + item.Description);	
+
+					var row = $('<tr></tr>');
+					row.append('<td>' + item.ItemCode + '</td>');
+					row.append('<td>' + item.Description + '</td>');
+					row.append('<td>' + item.UOM + '</td>');
+					row.append('<td>' + item.Cost + '</td>');
+					row.append('<td>' + item.Price + '</td>');
+					row.append('<td>' + item.SRP_1 + '</td>');
+					row.append('<td>' + item.SRP_2 + '</td>');
+					row.append('<td>' + item.SRP_3 + '</td>');
+					row.append('<td>' + item.SRP_4 + '</td>');
+					row.append('<td>' + item.SRP_5 + '</td>');
+					row.append('<td>' + item.SRP_6 + '</td>');
+					row.append('<td>' + item.SRP_7 + '</td>');
+					$('#detailsTable tbody').append(row);
+					// Append the item's name to the input field
+				});
+            }
+        });
+    });
+});
+
+
+$(document).ready(function() {
+    $('#btnSearch').click(function() {
+        var selectedSearch = $('#kt_select2_2').val();
+        // Send the selectedModule to the controller using AJAX
+        $.ajax({
+            url: "{{ route('search') }}", // Replace with your controller route
+            type: 'GET',
+            data: {
+                selectedSearch: selectedSearch,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                // Handle the response from the controller
+                console.log(response);
+				var data = response.data;
+				var dataInv = response.dataInv;
+				var dataP = response.dataP;
+				console.log(data);
+
+				var itemDescriptions = "";
+				$.each(response.data, function(index, item) {
+					itemDescriptions += item.Description + "\n";
+				});
+        		$('#itemDesc').val(itemDescriptions);
+				
+				var PackConfigs = "";
+				$.each(response.data, function(index, item) {
+					PackConfigs += item.PackConfig + "\n";
+				});
+        		$('#PackConfig').val(PackConfigs);
+
+				var Prices = "";
+				$.each(response.data, function(index, item) {
+					Prices += item.Price + "\n";
+				});
+        		$('#Price').val(Prices);
+
+				var ProductTypes = "";
+				$.each(response.data, function(index, item) {
+					ProductType += item.ProductType + "\n";
+				});
+        		$('#ProductType').val(ProductTypes);
+
+				var SRP_1s = "";
+				$.each(response.data, function(index, item) {
+					SRP_1s += item.SRP_1 + "\n";
+				});
+        		$('#SRP_1').val(SRP_1s);
+
+				var SRP_2s = "";
+				$.each(response.data, function(index, item) {
+					SRP_2s += item.SRP_2 + "\n";
+				});
+        		$('#SRP_2').val(SRP_2s);
+
+				var SRP_3s = "";
+				$.each(response.data, function(index, item) {
+					SRP_3s += item.SRP_3 + "\n";
+				});
+        		$('#SRP_3').val(SRP_3s);
+
+				var SRP_4s = "";
+				$.each(response.data, function(index, item) {
+					SRP_4s += item.SRP_4 + "\n";
+				});
+        		$('#SRP_4').val(SRP_4s);
+
+				var SRP_5s = "";
+				$.each(response.data, function(index, item) {
+					SRP_5s += item.SRP_5 + "\n";
+				});
+        		$('#SRP_5').val(SRP_5s);
+
+				var SRP_6s = "";
+				$.each(response.data, function(index, item) {
+					SRP_6s += item.SRP_6 + "\n";
+				});
+        		$('#SRP_6').val(SRP_6s);
+
+				var SRP_7s = "";
+				$.each(response.data, function(index, item) {
+					SRP_7s += item.SRP_7 + "\n";
+				});
+        		$('#SRP_7').val(SRP_7s);
+
+				
+					// Populate another table or element with dataInv
+					$('#InventoryTable tbody').empty();
+					$.each(dataInv, function(index, item) {
+						var row = $('<tr></tr>');
+						row.append('<td>' + item.ProductCode + '</td>');
+						row.append('<td>' + item.Description + '</td>');
+						row.append('<td>' + item.SOH + '</td>');
+					$('#InventoryTable tbody').append(row);
+
+					});
+
+					$('#detailsTable tbody').empty();
+					// Populate the table with the response data
+					$.each(dataP, function(index, item) {
+					var row = $('<tr></tr>');
+					row.append('<td>' + item.ItemCode + '</td>');
+					row.append('<td>' + item.REC_QTY + '</td>');
+					row.append('<td>' + item.created_at + '</td>');
+					row.append('<td>' + item.ExpirationDate + '</td>');
+					$('#detailsTable tbody').append(row);
+				});
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    });
+});
+</script>
+
+@endsection

@@ -226,7 +226,53 @@
 									</div>
 								@endif
 								</li>
-								
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+									<a href="javascript:;" class="menu-link menu-toggle">
+										<i class="menu-icon flaticon2-console"></i>
+										<span class="menu-text">Inventory</span>
+										<i class="menu-arrow"></i>	
+									</a>
+									
+									@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
+
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="/InventoryL" class="menu-link">
+													<span class="menu-text">Inventory Status</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+									@endif
+									@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
+
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="" class="menu-link">
+													<span class="menu-text">Item List (w/Cost)</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								@endif
+									@if(auth()->user()->role == 'Encoder' || auth()->user()->role == 'Admin') 
+
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item" aria-haspopup="true">
+												<a href="" class="menu-link">
+													<span class="menu-text">Item List (w/oCost)</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								@endif
+								</li>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-icon flaticon2-console"></i>
