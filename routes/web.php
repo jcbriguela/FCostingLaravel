@@ -164,4 +164,10 @@ Route::GET('search', [InventoryController::class, 'search'])->name('search');
 //Sales Inventory
 Route::GET('SalesInv', [SalesInvController::class, 'index']);
 
+Route::get('RecApproval',[InventoryController::class,'RecApproval']);
+
+Route::GET('/inventory-approval-list/{id}', [InventoryController::class, 'approval']);
+
+
+
 require __DIR__.'/auth.php';
