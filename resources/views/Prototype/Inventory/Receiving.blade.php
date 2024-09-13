@@ -252,16 +252,6 @@
 																				</g>
 																			</svg><!--end::Svg Icon--></span>
 																			</a>
-																			<a href="/inventory-list/{{ $row->Id }}"  class="btn btn-sm btn-clean btn-icon" title ="">
-																			<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo13\dist/../src/media/svg/icons\Files\Folder-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																					<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																						<rect x="0" y="0" width="24" height="24"/>
-																						<path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z" fill="#000000" opacity="0.3"/>
-																						<path d="M10.875,16.75 C10.6354167,16.75 10.3958333,16.6541667 10.2041667,16.4625 L8.2875,14.5458333 C7.90416667,14.1625 7.90416667,13.5875 8.2875,13.2041667 C8.67083333,12.8208333 9.29375,12.8208333 9.62916667,13.2041667 L10.875,14.45 L14.0375,11.2875 C14.4208333,10.9041667 14.9958333,10.9041667 15.3791667,11.2875 C15.7625,11.6708333 15.7625,12.2458333 15.3791667,12.6291667 L11.5458333,16.4625 C11.3541667,16.6541667 11.1145833,16.75 10.875,16.75 Z" fill="#000000"/>
-																					</g>
-																				</svg><!--end::Svg Icon--></span>
-																			</a>
-																			
 																			
 																																							</button>
 																		<!-- <button id ="myButton" class="btn btn-primary" data-id="{{ $row->Id }}">+</button> -->
@@ -433,10 +423,8 @@ function clearTable() {
     var table = document.getElementById("dataTable");
     var tbody = table.getElementsByTagName("tbody")[0];
     tbody.innerHTML = ""; // Clears the table body content
+	window.location.reload();
 }
-
-
-
 
 	</script>
 @endsection
